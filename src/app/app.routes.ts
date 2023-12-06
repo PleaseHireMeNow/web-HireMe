@@ -8,8 +8,14 @@ import { UserProgressComponent } from './components/user/user-progress/user-prog
 import { SignupComponent } from './components/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
 
+import { QuestionService } from './api.service';
+
 const AppRoutes: Routes = [
-    { path: 'home', component: HomeComponent },
+    { path: 'home', component: HomeComponent,
+        providers: [
+            QuestionService
+        ]
+    },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'question', component: QuestionAnswerComponent },
