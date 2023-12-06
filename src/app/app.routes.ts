@@ -7,8 +7,14 @@ import { UserHistoryComponent } from './components/user-history/user-history.com
 import { UserProgressComponent } from './components/user-progress/user-progress.component';
 import { SignupComponent } from './components/signup/signup.component';
 
+import { QuestionService } from './api.service';
+
 const AppRoutes: Routes = [
-    { path: 'home', component: HomeComponent },
+    { path: 'home', component: HomeComponent,
+        providers: [
+            QuestionService
+        ]
+    },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'question', component: QuestionAnswerComponent },
