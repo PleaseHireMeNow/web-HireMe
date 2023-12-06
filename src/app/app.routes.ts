@@ -12,9 +12,7 @@ import { QuestionService } from './api.service';
 
 const AppRoutes: Routes = [
     { path: 'home', component: HomeComponent,
-        providers: [
-            QuestionService
-        ]
+       
     },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },

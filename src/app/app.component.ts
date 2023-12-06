@@ -22,8 +22,9 @@ export class AppComponent implements OnInit {
   constructor(private apiService: QuestionService) {}; 
   ngOnInit(): void {   
     initFlowbite();   
-    this.apiService.getAllQuestions().subscribe((data: Question[]) => {     
+    this.apiService.getAllQuestions().subscribe((data: any) => {     
       this.questions = data;
+      console.log('data:', data);
     });
 }
 }
