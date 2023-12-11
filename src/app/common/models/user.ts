@@ -1,5 +1,5 @@
 import { CompletedQuestion } from "./question";
-import { Stack } from "./stacks";
+import { Stack } from "./topics";
 
 export interface User {
   userToken: string;
