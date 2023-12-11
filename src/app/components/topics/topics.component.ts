@@ -1,9 +1,11 @@
+import { SelectedTopic } from './../../common/models/selected-topic';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Topics } from '../../common/models/topics';
 import { Difficulty } from '../../common/models/difficulty';
 import { QuestionService } from '../../api.service';
 import { Question } from '../../common/models/question';
+import { SelectedTopic } from '../../common/models/selected-topic';
 
 @Component({
   selector: 'app-topics',
@@ -17,6 +19,18 @@ export class TopicsComponent {
   questions: Question[] = []; 
   topics: Topics[] = [];
   difficulty: Difficulty[] = [];
+  
+  emptySelectedTopic: SelectedTopic = {
+    topic: { 
+      name: '',
+      iconPath: '',
+  },
+    difficulty: {
+      name: '',
+      iconPath: '',
+  }};
+
+  selectedTopic = this.emptySelectedTopic
 
   constructor(private apiService: QuestionService) {}; 
   ngOnInit(): void {   
@@ -32,6 +46,15 @@ export class TopicsComponent {
       console.log('topics1:',this.topics)
       console.log('difficulty:',this.difficulty)
     });
+  }
 
+  handleTopic(topic: Object): void {
+    console.log('handleTopic clicked!', topic)
+
+    this.selectedTopic = {...topic}
+
+  };
+  handleDifficulty(level: Object): void {
+    console.log('handleDifficulty clicked!', level)
   }
 }
