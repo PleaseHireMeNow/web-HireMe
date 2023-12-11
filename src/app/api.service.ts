@@ -1,8 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import {Question} from '../app/common/models/question'
 
-// const Base_URL = 'http://localhost:3000';
+
 
 @Injectable({
     providedIn: 'root'
@@ -16,10 +15,8 @@ export class QuestionService{
     }
 
     getAllTopics (){
-        return this.http.get('http://localhost:3000/api/stackSelection/string1');
+        return this.http.get('http://localhost:3000/api/stackOptions');
     }
 
-    // private getUrl(){
-    //     return `${Base_URL}/${this.model}`;
-    // }
+
 }
