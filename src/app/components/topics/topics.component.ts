@@ -5,6 +5,18 @@ import { Difficulty } from '../../common/models/difficulty';
 import { QuestionService } from '../../api.service';
 import { Question } from '../../common/models/question';
 
+const emptyTopic: Topics = {
+  name: '',
+  iconPath: ''
+}
+
+const emptyDifficulty: Difficulty = {
+  name: '',
+  iconPath: '',
+}
+
+
+
 @Component({
   selector: 'app-topics',
   standalone: true,
@@ -17,6 +29,8 @@ export class TopicsComponent {
   questions: Question[] = []; 
   topics: Topics[] = [];
   difficulty: Difficulty[] = [];
+  selectedTopic = emptyTopic;
+  selectedDifficulty = emptyDifficulty;
 
   constructor(private apiService: QuestionService) {}; 
   ngOnInit(): void {   
@@ -32,6 +46,18 @@ export class TopicsComponent {
       console.log('topics1:',this.topics)
       console.log('difficulty:',this.difficulty)
     });
-
   }
+
+  selectTopic(topic: any){
+    console.log('In the selectTopic')
+    this.selectedTopic = topic;
+    console.log('the selected topic:', this.selectedTopic)
+  }
+
+  selectDifficulty(level:any){
+    console.log('In the diffectly')
+    this.selectedDifficulty = level;
+    console.log('Selected Difficulty',this.selectedDifficulty)
+  }
+  
 }

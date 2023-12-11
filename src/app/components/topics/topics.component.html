@@ -18,7 +18,7 @@
   <!-- Small Circle Cards -->
   <div class="flex justify-between mt-4 mb-6 text-gray-700">
     @for(topic of topics; track topic){
-    <div>
+    <div (click)="selectTopic(topic)">
       <div>
         <img
           class="w-16 h-16 p-4 bg-white border border-gray-200 rounded-full shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
@@ -36,7 +36,7 @@
 >
   <div class="flex justify-between text-gray-600">
     @for(level of difficulty; track level){
-    <div>
+    <div (click)="selectDifficulty(level)">
       <img
         class="w-16 h-16 p-4 bg-white border border-gray-200 rounded-full shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
         src="{{ level.iconPath }}"
