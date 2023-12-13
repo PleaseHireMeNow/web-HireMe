@@ -1,8 +1,8 @@
+import { Difficulty } from './../../common/models/difficulty';
 import { SelectedTopic } from './../../common/models/selected-topic';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Topics } from '../../common/models/topics';
-import { Difficulty } from '../../common/models/difficulty';
 import { QuestionService } from '../../api.service';
 import { Question } from '../../common/models/question';
 
@@ -50,10 +50,12 @@ export class TopicsComponent {
   handleTopic(topic: Topics): void {
     console.log('handleTopic clicked!', topic)
 
-    this.selectedTopic.topic = {...topic, }
+    this.selectedTopic.topic = {...topic }
 
   };
-  handleDifficulty(level: Object): void {
+  handleDifficulty(level: Difficulty): void {
     console.log('handleDifficulty clicked!', level)
+
+    this.selectedTopic.difficulty = {...level}
   }
 }
