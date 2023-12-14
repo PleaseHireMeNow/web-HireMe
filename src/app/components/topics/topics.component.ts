@@ -49,13 +49,16 @@ export class TopicsComponent {
 
   handleTopic(topic: Topics): void {
     console.log('handleTopic clicked!', topic)
-
+    // add topic to user's selectedTopic object for session
     this.selectedTopic.topic = {...topic }
+    console.log('selectedTopic is:', this.selectedTopic)
 
   };
   handleDifficulty(level: Difficulty): void {
     console.log('handleDifficulty clicked!', level)
-
+    // add difficulty to user's selectedTopic object for session
     this.selectedTopic.difficulty = {...level}
+    console.log('selectedTopic is:', this.selectedTopic)
+
   }
 }
