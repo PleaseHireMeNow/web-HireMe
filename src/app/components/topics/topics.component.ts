@@ -1,7 +1,8 @@
+import { Difficulty } from './../../common/models/difficulty';
+import { SelectedTopic } from './../../common/models/selected-topic';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Topics } from '../../common/models/topics';
-import { Difficulty } from '../../common/models/difficulty';
 import { QuestionService } from '../../api.service';
 import { Question } from '../../common/models/question';
 
