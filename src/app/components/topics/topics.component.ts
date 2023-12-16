@@ -59,5 +59,16 @@ export class TopicsComponent {
     this.selectedDifficulty = level;
     console.log('Selected Difficulty',this.selectedDifficulty)
   }
-  
+
+  handleSubmit(){
+    console.log('I Have been clicked!', this.selectedTopic.name, this.selectedDifficulty.name);
+    if(this.selectedTopic.name !== '' && this.selectedDifficulty.name  !== ''){
+      console.log(' I CAN MOVE ON')
+    }
+    else{
+      console.log('WRONGGGGGGG CAN"T MOVE ON')
+      alert('Please pick a topic or difficulty')
+    }
+  }
+
 }
