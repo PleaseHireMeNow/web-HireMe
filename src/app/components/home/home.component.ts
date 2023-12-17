@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TopicsComponent } from '../topics/topics.component';
-import { RouterModule, Router } from '@angular/router';
-import  {AppRoutingModule}  from '../../app-routing.module'
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -20,7 +20,6 @@ export class HomeComponent {
   handleGetStarted (){
     console.log('I have been clicked')
     this.router.navigate(['/topics']);
-
   }
   
 

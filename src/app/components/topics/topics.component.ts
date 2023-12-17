@@ -4,7 +4,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Topics } from '../../common/models/topics';
 import { QuestionService } from '../../api.service';
-import { Question } from '../../common/models/question';
+// import { Question } from '../../common/models/question';
+import { Router } from '@angular/router';
 
 const emptyTopic: Topics = {
   name: '',
@@ -24,18 +25,19 @@ const emptyDifficulty: Difficulty = {
   styleUrl: './topics.component.scss',
 })
 export class TopicsComponent {
-  questions: Question[] = [];
+  // questions: Question[] = [];
   topics: Topics[] = [];
   difficulty: Difficulty[] = [];
   selectedTopic = emptyTopic;
   selectedDifficulty = emptyDifficulty;
 
-  constructor(private apiService: QuestionService) {}
+  constructor(private apiService: QuestionService, private router: Router) {}
+
   ngOnInit(): void {
-    this.apiService.getAllQuestions().subscribe((data: any) => {
-      this.questions = data;
-      console.log('data:', data);
-    });
+    // this.apiService.getAllQuestions().subscribe((data: any) => {
+    //   this.questions = data;
+    //   console.log('data:', data);
+    // });
 
     this.apiService.getAllTopics().subscribe((data: any) => {
       this.topics = data.topics;
@@ -74,6 +76,9 @@ export class TopicsComponent {
         }),
       ];
       console.log('send this,', sendTo)
+      
+      this.router.navigate(['/question'])
+
     } else {
       console.log('WRONGGGGGGG CAN"T MOVE ON');
       alert('Please pick a topic or difficulty');
