@@ -64,7 +64,14 @@ export class TopicsComponent {
   handleSubmit(){
     console.log('I Have been clicked!', this.selectedTopic.name, this.selectedDifficulty.name);
     if(this.selectedTopic.name !== '' && this.selectedDifficulty.name  !== ''){
+      let sendTo = [];
       console.log(' I CAN MOVE ON')
+      let send = {
+        topics: this.selectedTopic,
+        difficulty: this.selectedDifficulty,
+      }
+      sendTo.push(send);
+      console.log('Send to:', sendTo);
     }
     else{
       console.log('WRONGGGGGGG CAN"T MOVE ON')
