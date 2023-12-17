@@ -1,8 +1,6 @@
-<p>topics works!</p>
-
-<div>
+<div class="mt-4 ml-2 justify-center">
   <div
-    class="max-w-sm p-6 bg-white border border-gray-200 rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-4"
+    class="max-w-sm p-6 bg-white border border-gray-200 rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-4  mx-auto"
   >
     <!-- Big Card Content -->
     <a href="#" class="block flex items-center justify-center flex-col">
@@ -17,7 +15,7 @@
     </a>
 
     <!-- Small Circle Cards -->
-    <div class="flex justify-between mt-4 mb-6 text-gray-700">
+    <div class="flex justify-between mt-4 mb-6 text-gray-700 mx-auto">
       @for(topic of topics; track topic){
       <div (click)="selectTopic(topic)">
         <div>
@@ -33,9 +31,9 @@
   </div>
 
   <div
-    class="max-w-sm p-6 bg-white border rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+    class="max-w-sm p-6 bg-white border rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700  mx-auto"
   >
-    <div class="flex justify-between text-gray-600">
+    <div class="flex justify-between text-gray-600 mx-auto">
       @for(level of difficulty; track level){
       <div (click)="selectDifficulty(level)">
         <img
@@ -48,7 +46,7 @@
     </div>
   </div>
 
-  <div class="flex items-center justify-center mt-4">
+  <div class="flex items-center justify-center mt-4  mx-auto">
     <button 
         (click)="handleSubmit()"
       type="button"
