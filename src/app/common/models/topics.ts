@@ -1,4 +1,4 @@
-export interface Stack {
+export interface Topics {
   name: string;
   iconPath: string;
 }

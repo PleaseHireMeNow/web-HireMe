@@ -1,0 +1,48 @@
+<p>topics works!</p>
+
+<div
+  class="max-w-sm p-6 bg-white border border-gray-200 rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-4"
+>
+  <!-- Big Card Content -->
+  <a href="#" class="block flex items-center justify-center flex-col">
+    <h5
+      class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+    >
+      Select a topic
+    </h5>
+    <p class="font-normal text-gray-700 dark:text-gray-400">
+      Select a topic to start a session
+    </p>
+  </a>
+
+  <!-- Small Circle Cards -->
+  <div class="flex justify-between mt-4 mb-6 text-gray-700">
+    @for(topic of topics; track topic){
+    <div (click)="handleTopic(topic)" >
+      <div>
+        <img 
+          class="w-16 h-16 p-4 bg-white border border-gray-200 rounded-full shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          src="{{ topic.iconPath }}"
+        />
+      </div>
+      {{ topic.name }}
+    </div>
+    }
+  </div>
+</div>
+
+<div
+  class="max-w-sm p-6 bg-white border rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+>
+  <div class="flex justify-between text-gray-600">
+    @for(level of difficulty; track level){
+    <div (click)="handleDifficulty(level)">
+      <img
+        class="w-16 h-16 p-4 bg-white border border-gray-200 rounded-full shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+        src="{{ level.iconPath }}"
+      />
+      {{ level.name }}
+    </div>
+    }
+  </div>
+</div>
