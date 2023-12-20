@@ -18,12 +18,13 @@ export class QuestionAnswerComponent {
   ngOnInit(): void {
     this.apiService.getAllQuestions().subscribe((data: any) => {
       this.questions = data;
-      console.log('data:', data);
-      console.log('data[0]', data[0])
-      console.log('data[0].questionID', data[0].question_id)
-      console.log('data[0]', data[0].question_content.text)
-      console.log('data[0]', data[0].question_content)
-      console.log('data[0]', data[0].question_content.answers[0])
+      console.log('Data:', data);
+      console.log('this.questions', this.questions[0])
+      console.log('Questions_id', this.questions[0].question_id)
+      console.log('Questions 1', this.questions[0].question_content.text)
+      console.log('Question 2:', this.questions[1].question_content.text)
+      console.log('answer 1:', this.questions[0].question_content.answers[0].answer_content.text)
+      console.log('answer 2:', this.questions[0].question_content.answers[1].answer_content.text)
     });
   }
 
