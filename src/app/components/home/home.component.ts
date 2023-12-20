@@ -19,7 +19,7 @@ export class HomeComponent {
 
   handleGetStarted (){
     console.log('I have been clicked')
-    this.router.navigate(['/topics']);
+    this.router.navigate(['/question']);
   }
   
 
