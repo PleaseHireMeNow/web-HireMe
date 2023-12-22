@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuestionService } from '../../api.service';
 import { Question } from '../../common/models/question';
+import { QuestionListComponent } from '../question-list/question-list.component';
+import { AnswerListComponent } from '../answer-list/answer-list.component';
 
 @Component({
   selector: 'app-question-answer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, QuestionListComponent, AnswerListComponent],
   templateUrl: './question-answer.component.html',
   styleUrl: './question-answer.component.scss'
 })
@@ -26,6 +28,16 @@ export class QuestionAnswerComponent {
       console.log('answer 1:', this.questions[0].question_content.answers[0].answer_content.text)
       console.log('answer 2:', this.questions[0].question_content.answers[1].answer_content.text)
     });
+  }
+
+  handleAnswer(answer: any){
+    console.log('This answer has been slected', answer)
+    if(answer.is_correct){
+      console.log('You are correct')
+    }
+    else{
+      console.log('WRONG')
+    }
   }
 
 }
