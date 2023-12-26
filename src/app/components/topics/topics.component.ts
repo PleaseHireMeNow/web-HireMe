@@ -47,7 +47,6 @@ export class TopicsComponent {
       console.log('difficulty:', this.difficulty);
     });
   }
-
   selectTopic(topic: any) {
     console.log('In the selectTopic');
     this.selectedTopic = topic;
@@ -83,5 +82,6 @@ export class TopicsComponent {
       console.log('WRONGGGGGGG CAN"T MOVE ON');
       alert('Please pick a topic or difficulty');
     }
+
   }
 }
