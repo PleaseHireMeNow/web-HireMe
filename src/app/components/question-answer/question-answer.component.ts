@@ -14,7 +14,7 @@ import { AnswerListComponent } from '../answer-list/answer-list.component';
 })
 export class QuestionAnswerComponent {
   questions: Question[] = [];
-  currentQuestionIndex: number = 0;
+  currentQuestionIndex: number = 18;
   
   constructor(private apiService: QuestionService  ) {}
 
@@ -42,7 +42,9 @@ export class QuestionAnswerComponent {
   }
 
   nextQuestion(){
-    if(this.currentQuestionIndex < this.questions.length + 1){
+    if(this.currentQuestionIndex < this.questions.length + 1 ){
+      console.log('Index:', this.currentQuestionIndex)
+      console.log('question.length', this.questions.length)
       this.currentQuestionIndex++;
     }
   }
