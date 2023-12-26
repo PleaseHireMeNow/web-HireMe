@@ -2,21 +2,21 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuestionService } from '../../api.service';
 import { Question } from '../../common/models/question';
-import { QuestionListComponent } from '../question-list/question-list.component';
-import { AnswerListComponent } from '../answer-list/answer-list.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-question-answer',
   standalone: true,
-  imports: [CommonModule, QuestionListComponent, AnswerListComponent],
+  imports: [CommonModule,],
   templateUrl: './question-answer.component.html',
   styleUrl: './question-answer.component.scss'
 })
 export class QuestionAnswerComponent {
   questions: Question[] = [];
-  currentQuestionIndex: number = 18;
+  currentQuestionIndex: number = 0;
+  correctAnswer: boolean|null = null;
   
-  constructor(private apiService: QuestionService  ) {}
+  constructor(private apiService: QuestionService, private router: Router  ) {}
 
   ngOnInit(): void {
     this.apiService.getAllQuestions().subscribe((data: any) => {
@@ -35,9 +35,11 @@ export class QuestionAnswerComponent {
     console.log('This answer has been slected', answer)
     if(answer.is_correct){
       console.log('You are correct')
+      this.correctAnswer = true;
     }
     else{
       console.log('WRONG')
+      this.correctAnswer = false;
     }
   }
 
@@ -46,6 +48,7 @@ export class QuestionAnswerComponent {
       console.log('Index:', this.currentQuestionIndex)
       console.log('question.length', this.questions.length)
       this.currentQuestionIndex++;
+      this.correctAnswer = null;
     }
   }
 

@@ -1,54 +1,69 @@
 <div class="mt-4 justify-center">
-  <div *ngIf="currentQuestionIndex < questions.length">
-    <div
-      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto mb-6"
-    >
-      <h5
-        class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center"
+  <div *ngIf="correctAnswer == null">
+    <div *ngIf="currentQuestionIndex < questions.length">
+      <div
+        class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto mb-6"
       >
-        {{ questions[currentQuestionIndex].question_content.text }}
-      </h5>
-
-      <!-- Answers -->
-
-      <div>
-        @for(answer of questions[currentQuestionIndex].question_content.answers;
-        track answer){
-        <div
-          class="block max-w-2xs p-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mx-auto my-4"
-          (click)="handleAnswer(answer)"
+        <h5
+          class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center"
         >
-          <h5
-            class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-center"
+          {{ questions[currentQuestionIndex].question_content.text }}
+        </h5>
+
+        <!-- Answers -->
+
+        <div>
+          @for(answer of
+          questions[currentQuestionIndex].question_content.answers; track
+          answer){
+          <div
+            class="block max-w-2xs p-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mx-auto my-4"
+            (click)="handleAnswer(answer)"
           >
-            {{ answer.answer_content.text }}
-          </h5>
+            <h5
+              class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-center"
+            >
+              {{ answer.answer_content.text }}
+            </h5>
+          </div>
+          }
         </div>
-        }
-      </div>
 
-      <!-- Next button -->
+        <!-- Done  with the  questions -->
 
-      <div>
-        <button
-          type="button"
-          class="p-4 font-medium text-center text-white uppercase bg-gray-800 w-1/10 active:bg-black rounded-xl active:scale-105"
-          (click)="nextQuestion()"
-        >
-          Next
-        </button>
-      </div>
-
-      <div *ngIf="currentQuestionIndex > questions.length - 1">
-        <div
-          class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto mb-6"
-        >
-          <p>All questions are answers! move to dashboard</p>
+        <div *ngIf="currentQuestionIndex >= questions.length">
+          <div
+            class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto mb-6"
+          >
+            <p>All questions are answers! move to dashboard</p>
+          </div>
         </div>
+
       </div>
-
-
-
     </div>
   </div>
+
+<!-- Correct answer -->
+<div *ngIf="correctAnswer !== null">
+  <div class="mt-16 flex justify-center items-center">
+    <div
+      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow text-black text-center font-bold"
+    >
+      {{ correctAnswer ? 'Correct Answer' : 'Incorrect Answer' }}
+    </div>
+  </div>
+
+  <!-- Next button -->
+  <div class="mt-8 flex justify-center">
+    <button
+      type="button"
+      class="p-4 font-medium text-center text-white uppercase bg-gray-800 w-1/10 active:bg-black rounded-xl active:scale-105"
+      (click)="nextQuestion()"
+    >
+      Next
+    </button>
+  </div>
+</div>
+
+
 </div>
