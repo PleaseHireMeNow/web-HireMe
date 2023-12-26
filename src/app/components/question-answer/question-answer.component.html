@@ -29,17 +29,16 @@
           }
         </div>
 
-        <!-- Done  with the  questions -->
-
-        <div *ngIf="currentQuestionIndex >= questions.length">
-          <div
-            class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto mb-6"
-          >
-            <p>All questions are answers! move to dashboard</p>
-          </div>
-        </div>
-
       </div>
+    </div>
+  </div>
+
+   <!-- Done  with the  questions -->
+  <div *ngIf="currentQuestionIndex  === questions.length ">
+    <div
+      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto mb-6"
+    >
+      <p>All questions are answers! move to dashboard</p>
     </div>
   </div>
 
