@@ -1,48 +1,58 @@
-<p>topics works!</p>
+<div class="mt-4 ml-2 justify-center">
+  <div
+    class="max-w-sm p-6 bg-white border border-gray-200 rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-4  mx-auto"
+  >
+    <!-- Big Card Content -->
+    <a href="#" class="block flex items-center justify-center flex-col">
+      <h5
+        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+      >
+        Select a topic
+      </h5>
+      <p class="font-normal text-gray-700 dark:text-gray-400">
+        Select a topic to start a session
+      </p>
+    </a>
 
-<div
-  class="max-w-sm p-6 bg-white border border-gray-200 rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-4"
->
-  <!-- Big Card Content -->
-  <a href="#" class="block flex items-center justify-center flex-col">
-    <h5
-      class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-    >
-      Select a topic
-    </h5>
-    <p class="font-normal text-gray-700 dark:text-gray-400">
-      Select a topic to start a session
-    </p>
-  </a>
-
-  <!-- Small Circle Cards -->
-  <div class="flex justify-between mt-4 mb-6 text-gray-700">
-    @for(topic of topics; track topic){
-    <div (click)="handleTopic(topic)" >
-      <div>
-        <img 
-          class="w-16 h-16 p-4 bg-white border border-gray-200 rounded-full shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-          src="{{ topic.iconPath }}"
-        />
+    <!-- Small Circle Cards -->
+    <div class="flex justify-between mt-4 mb-6 text-gray-700 mx-auto">
+      @for(topic of topics; track topic){
+      <div (click)="selectTopic(topic)">
+        <div>
+          <img
+            class="w-16 h-16 p-4 bg-white border border-gray-200 rounded-full shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            src="{{ topic.iconPath }}"
+          />
+        </div>
+        {{ topic.name }}
       </div>
-      {{ topic.name }}
+      }
     </div>
-    }
   </div>
-</div>
 
-<div
-  class="max-w-sm p-6 bg-white border rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
->
-  <div class="flex justify-between text-gray-600">
-    @for(level of difficulty; track level){
-    <div (click)="handleDifficulty(level)">
-      <img
-        class="w-16 h-16 p-4 bg-white border border-gray-200 rounded-full shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-        src="{{ level.iconPath }}"
-      />
-      {{ level.name }}
+  <div
+    class="max-w-sm p-6 bg-white border rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700  mx-auto"
+  >
+    <div class="flex justify-between text-gray-600 mx-auto">
+      @for(level of difficulty; track level){
+      <div (click)="selectDifficulty(level)">
+        <img
+          class="w-16 h-16 p-4 bg-white border border-gray-200 rounded-full shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          src="{{ level.iconPath }}"
+        />
+        {{ level.name }}
+      </div>
+      }
     </div>
-    }
+  </div>
+
+  <div class="flex items-center justify-center mt-4  mx-auto">
+    <button 
+        (click)="handleSubmit()"
+      type="button"
+      class="p-4 font-medium text-center text-white uppercase bg-gray-800 w-1/10 active:bg-black rounded-xl active:scale-105 mx-auto"
+    >
+      Submit
+    </button>
   </div>
 </div>
