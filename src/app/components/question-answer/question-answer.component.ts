@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { QuestionService } from '../../api.service';
 import { Question } from '../../common/models/question';
 import { Router } from '@angular/router';
+import { NewOrPrevSessionService } from '../../services/new-or-prev-session.service';
 
 @Component({
   selector: 'app-question-answer',
@@ -15,13 +16,17 @@ export class QuestionAnswerComponent {
   questions: Question[] = [];
   currentQuestionIndex: number = 0;
   correctAnswer: boolean|null = null;
-  
-  constructor(private apiService: QuestionService, private router: Router  ) {}
+  currentState: any;
+
+  constructor(private apiService: QuestionService, private router: Router, private NewOrPrevSessionService: NewOrPrevSessionService  ) {
+    this.currentState = this.NewOrPrevSessionService.getState();
+  }
 
   ngOnInit(): void {
     this.apiService.getAllQuestions().subscribe((data: any) => {
       this.questions = data;
       console.log('Data:', data);
+      console.log(this.currentState)
       console.log('this.questions', this.questions[0])
       console.log('Questions_id', this.questions[0].question_id)
       console.log('Questions 1', this.questions[0].question_content.text)
