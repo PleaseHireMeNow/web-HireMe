@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { QuestionService } from '../../api.service';
 import { Question } from '../../common/models/question';
 import { Router } from '@angular/router';
+import { Session } from '../../common/models/session';
 
 @Component({
   selector: 'app-question-answer',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrl: './question-answer.component.scss'
 })
 export class QuestionAnswerComponent {
-  questions: Question[] = [];
+  questions: Session = {} as Session;
   currentQuestionIndex: number = 0;
   correctAnswer: boolean|null = null;
   
@@ -22,12 +23,12 @@ export class QuestionAnswerComponent {
     this.apiService.getAllQuestions().subscribe((data: any) => {
       this.questions = data;
       console.log('Data:', data);
-      console.log('this.questions', this.questions[0])
-      console.log('Questions_id', this.questions[0].question_id)
-      console.log('Questions 1', this.questions[0].question_content.text)
-      console.log('Question 2:', this.questions[1].question_content.text)
-      console.log('answer 1:', this.questions[0].question_content.answers[0].answer_content.text)
-      console.log('answer 2:', this.questions[0].question_content.answers[1].answer_content.text)
+      console.log('this.questions', this.questions)
+      // console.log('Questions_id', this.questions[0].questions)
+      // console.log('Questions 1', this.questions[0].question_content.text)
+      // console.log('Question 2:', this.questions[1].question_content.text)
+      // console.log('answer 1:', this.questions[0].question_content.answers[0].answer_content.text)
+      // console.log('answer 2:', this.questions[0].question_content.answers[1].answer_content.text)
     });
   }
 
@@ -44,9 +45,9 @@ export class QuestionAnswerComponent {
   }
 
   nextQuestion(){
-    if(this.currentQuestionIndex < this.questions.length + 1 ){
+    if(this.currentQuestionIndex < this.questions.questions.length + 1 ){
       console.log('Index:', this.currentQuestionIndex)
-      console.log('question.length', this.questions.length)
+      console.log('question.length', this.questions.questions.length)
       this.currentQuestionIndex++;
       this.correctAnswer = null;
     }
