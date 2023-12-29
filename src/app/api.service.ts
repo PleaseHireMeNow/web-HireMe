@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Session } from "./common/models/session";
 import { Answer } from "./common/models/session";
 import { Question } from "./common/models/question";
+import { NewOrPrevSessionService } from "./services/new-or-prev-session.service";
 
 
 
@@ -12,14 +13,17 @@ import { Question } from "./common/models/question";
 
 export class QuestionService{
     model = 'Question';
-    constructor(private http: HttpClient) {}
+    currentState: any;
+    constructor(private http: HttpClient, private NewOrPrevSessionService: NewOrPrevSessionService) {
+        this.currentState = this.NewOrPrevSessionService.getState()}
     getAllQuestions (){
         let sessionQuestion 
-        // if(newSession) {
+        let newSession = this.currentState
+        if(newSession === 'new') {
             sessionQuestion = this.http.get('http://localhost:3000/api/questions/pjgoodman/new')
-        // } else { 
-        //     sessionQuestion = this.http.get('http://localhost:3000/api/questions/pjgoodman/prev')
-        // };
+        } else { 
+            sessionQuestion = this.http.get('http://localhost:3000/api/questions/pjgoodman/prev')
+        };
         console.log('sessionQuestion', sessionQuestion)
         return sessionQuestion
     }

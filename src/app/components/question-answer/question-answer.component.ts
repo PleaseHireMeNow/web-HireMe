@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuestionService } from '../../api.service';
 import { Question } from '../../common/models/question';
+import { Answer, Session } from '../../common/models/session';
 import { Router } from '@angular/router';
 import { NewOrPrevSessionService } from '../../services/new-or-prev-session.service';
 
@@ -25,8 +26,9 @@ export class QuestionAnswerComponent {
   ngOnInit(): void {
     this.apiService.getAllQuestions().subscribe((data: any) => {
       this.questions = data;
+      this.currentQuestionIndex = this.questions.current_question
       console.log('Data:', data);
-      console.log('this.questions', this.questions)
+      console.log('this.currentState', this.currentState)
       // console.log('Questions_id', this.questions[0].questions)
       // console.log('Questions 1', this.questions[0].question_content.text)
       // console.log('Question 2:', this.questions[1].question_content.text)
