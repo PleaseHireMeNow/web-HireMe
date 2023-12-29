@@ -5,13 +5,14 @@ import { Injectable } from '@angular/core';
 })
 export class NewOrPrevSessionService {
 
-  private myState: any;
+  public myState: any = 'new';
 
   getState(): any {
     return this.myState;
   }
 
   setState(newState: any): void {
+    console.log('setState')
     this.myState = newState;
   }
 

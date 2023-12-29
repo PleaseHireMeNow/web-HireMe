@@ -2,12 +2,12 @@ import { Difficulty } from './../../common/models/difficulty';
 import { SelectedTopic } from './../../common/models/selected-topic';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Topics } from '../../common/models/topics';
+import { Topic } from '../../common/models/topic';
 import { QuestionService } from '../../api.service';
 // import { Question } from '../../common/models/question';
 import { Router } from '@angular/router';
 
-const emptyTopic: Topics = {
+const emptyTopic: Topic = {
   name: '',
   iconPath: '',
 };
@@ -26,7 +26,7 @@ const emptyDifficulty: Difficulty = {
 })
 export class TopicsComponent {
   // questions: Question[] = [];
-  topics: Topics[] = [];
+  topics: Topic[] = [];
   difficulty: Difficulty[] = [];
   selectedTopic = emptyTopic;
   selectedDifficulty = emptyDifficulty;
@@ -48,21 +48,6 @@ export class TopicsComponent {
     });
   }
 
-<<<<<<<<< Temporary merge branch 1
-  handleTopic(topic: Topics): void {
-    console.log('handleTopic clicked!', topic)
-    // add topic to user's selectedTopic object for session
-    this.selectedTopic.topic = {...topic }
-    console.log('selectedTopic is:', this.selectedTopic)
-
-  };
-  handleDifficulty(level: Difficulty): void {
-    console.log('handleDifficulty clicked!', level)
-    // add difficulty to user's selectedTopic object for session
-    this.selectedTopic.difficulty = {...level}
-    console.log('selectedTopic is:', this.selectedTopic)
-
-=========
   selectTopic(topic: any) {
     console.log('In the selectTopic');
     this.selectedTopic = topic;
@@ -91,7 +76,7 @@ export class TopicsComponent {
         }),
       ];
       console.log('send this,', sendTo)
-      
+      this.apiService.setTopic(this.selectedTopic, this.selectedDifficulty)
       this.router.navigate(['/question'])
 
     } else {

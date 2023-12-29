@@ -13,8 +13,8 @@ export class NavBarComponent {
 
   constructor(private router: Router) {}
 
-  handleSetting(){
-    console.log('Setting has been clicked')
+  handleSettings(){
+    console.log('Settings has been clicked')
     this.router.navigate(['/topics'])
 
   }
