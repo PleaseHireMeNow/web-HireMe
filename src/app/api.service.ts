@@ -4,6 +4,8 @@ import { Session } from "./common/models/session";
 import { Answer } from "./common/models/session";
 import { Question } from "./common/models/question";
 import { NewOrPrevSessionService } from "./services/new-or-prev-session.service";
+import { Difficulty } from "./common/models/difficulty";
+import { Topic } from "./common/models/topic";
 
 
 
@@ -16,7 +18,7 @@ export class QuestionService{
     currentState: any;
     constructor(private http: HttpClient, private NewOrPrevSessionService: NewOrPrevSessionService) {
         this.currentState = this.NewOrPrevSessionService.getState()}
-    getAllQuestions (){
+    getAllQuestions(){
         let sessionQuestion 
         let newSession = this.currentState
         if(newSession === 'new') {
@@ -28,14 +30,18 @@ export class QuestionService{
         return sessionQuestion
     }
 
-    getAllTopics (){
+    getAllTopics(){
         return this.http.get('http://localhost:3000/api/topic_options/pjgoodman');
-        
     }
 
-    sendAnswer (question: Question, answer: Answer) {
-        const headers = new HttpHeaders().set('Content-Type', 'application/json')
+    sendAnswer(question: Question, answer: Answer) {
         return this.http.post<any>('http://localhost:3000/api/answer_history/pjgoodman', {question, answer}, {observe: 'response'} );
+    }
+
+    setTopic(topic: Topic, difficulty: Difficulty) {
+        console.log('in setTopic')
+        return this.http.post<any>('http://localhost:3000/api/topic_selection/pjgoodman', {topic, difficulty}, {observe: 'response'} );
+
     }
 
 }
