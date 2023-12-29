@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { QuestionService } from '../../api.service';
 import { Question } from '../../common/models/question';
 import { Router } from '@angular/router';
-import { Session } from '../../common/models/session';
+import { Session, Answer } from '../../common/models/session';
 
 @Component({
   selector: 'app-question-answer',
@@ -32,7 +32,7 @@ export class QuestionAnswerComponent {
     });
   }
 
-  handleAnswer(answer: any){
+  handleAnswer(question: Question, answer: Answer){
     console.log('This answer has been selected', answer)
     if(answer.is_correct){
       console.log('You are correct')
@@ -42,6 +42,11 @@ export class QuestionAnswerComponent {
       console.log('WRONG')
       this.correctAnswer = false;
     }
+    this.apiService.sendAnswer(question,answer).subscribe( (res) => {
+      console.log('post response', res)
+    } ,(error) => {
+      console.log('error', error)
+    }) ;
   }
 
   nextQuestion(){

@@ -18,7 +18,7 @@
           answer){
           <div
             class="block max-w-2xs p-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mx-auto my-4"
-            (click)="handleAnswer(answer)"
+            (click)="handleAnswer(questions.questions[currentQuestionIndex].question, answer)"
           >
             <h5
               class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-center"
