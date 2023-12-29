@@ -32,7 +32,7 @@ export class QuestionAnswerComponent {
   }
 
   handleAnswer(answer: any){
-    console.log('This answer has been slected', answer)
+    console.log('This answer has been selected', answer)
     if(answer.is_correct){
       console.log('You are correct')
       this.correctAnswer = true;

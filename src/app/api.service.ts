@@ -11,11 +11,11 @@ export class QuestionService{
     model = 'Question';
     constructor(private http: HttpClient) {}
     getAllQuestions (){
-        return this.http.get('http://localhost:3000/api/questions/string1');
+        return this.http.get('http://localhost:3000/api/questions');
     }
 
     getAllTopics (){
-        return this.http.get('http://localhost:3000/api/stackOptions');
+        return this.http.get('http://localhost:3000/api/topic_options');
     }
 
 
