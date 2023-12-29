@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { SelectedTopic } from './../../../common/models/selected-topic';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,5 +10,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './user-history.component.scss'
 })
 export class UserHistoryComponent {
-
+  @Input() selectedTopic?: string;
 }
