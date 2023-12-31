@@ -15,28 +15,19 @@
                 </th>
         </thead>
         <tbody>
+          @for(session of sessionHistory; track session) {
             <tr class="bg-white border-b border-secondary">
-                <th scope="row" class="px-6 py-4 font-medium text-accent  dark:text-blue-100">
-                    JavaScript
-                </th>
-                <td class="px-6 py-4">
-                    Mid-Level
-                </td>
-                <td class="px-6 py-4">
-                    8/10
-                </td>
+              <th scope="row" class="px-6 py-4 font-medium text-accent  dark:text-blue-100">
+                {{session.topic_selection.topic.name}}
+              </th>
+              <td class="px-6 py-4">
+                {{session.topic_selection.difficulty.name}}
+              </td>
+              <td class="px-6 py-4">
+                8/10
+              </td>
             </tr>
-            <tr class="bg-white border-b border-blue-400">
-                <th scope="row" class="px-6 py-4 font-medium text-accent  dark:text-blue-100">
-                    JavaScript
-                </th>
-                <td class="px-6 py-4">
-                    Mid-Level
-                </td>
-                <td class="px-6 py-4">
-                    8/10
-                </td>
-            </tr>
+          }
         </tbody>
     </table>
 </div>

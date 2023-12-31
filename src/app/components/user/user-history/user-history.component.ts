@@ -4,6 +4,7 @@ import { TopicSelection } from '../../../common/models/topic-selection';
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Session } from '../../../common/models/session';
+import { User } from '../../../common/models/user';
 
 @Component({
   selector: 'app-user-history',
@@ -14,25 +15,22 @@ import { Session } from '../../../common/models/session';
 })
 export class UserHistoryComponent {
   @Input() selectedTopic?: string;
-
-  sessionHistory: any;
-
-  // constructor(private UserService: UserService){
-  //   this.sessionHistory = this.UserService.getSessions()
-  
-  // }
+  user: User = {} as User;
+  sessionHistory: Session[] = [] as Session[];
 
   constructor(private apiService: ApiService) {
     this.apiService.getUserInfo().subscribe((data: any) => {
-      this.sessionHistory = data.session_history;
+  
     })
   }
 
 ngOnInit(): void {
-  this.getSessionHistory()
+    this.apiService.getUserInfo().subscribe((data: any) => {
+      this.user = data as User;
+      this.sessionHistory = data.session_history as Session[]
+      console.log(this.sessionHistory)
+    })
 }
-public getSessionHistory = () => {
-  console.log('this.sessionHistory', this.sessionHistory)
-}
+
 
 }
