@@ -1,4 +1,4 @@
-export interface Topics {
+export interface Topic {
   name: string;
   iconPath: string;
 }

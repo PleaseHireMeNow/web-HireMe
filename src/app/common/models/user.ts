@@ -1,5 +1,5 @@
 import { CompletedQuestion } from "./question";
-import { Topics } from "./topics";
+import { Topics } from "./topic";
 
 export interface User {
   userToken: string;
