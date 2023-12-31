@@ -1,5 +1,5 @@
 <div class="mt-4 justify-center">
-  <div *ngIf="correctAnswer == null">
+  <div *ngIf="submit === null">
     <div *ngIf="currentQuestionIndex < questions.length">
       <div
         class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto mb-6"
@@ -28,13 +28,23 @@
           </div>
           }
         </div>
-
+        <div class="mt-8 flex justify-center">
+          <button
+            type="button"
+            class=" p-4 font-medium text-center text-white uppercase bg-gray-800 w-1/10 active:bg-black rounded-xl active:scale-105"
+            (click)="handleSubmit()"
+          >
+            Submit
+          </button>
+        </div>
+        
+        
       </div>
     </div>
   </div>
 
-   <!-- Done  with the  questions -->
-  <div *ngIf="currentQuestionIndex  === questions.length ">
+  <!-- Done  with the  questions -->
+  <div *ngIf="currentQuestionIndex === questions.length">
     <div
       class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto mb-6"
     >
@@ -42,27 +52,28 @@
     </div>
   </div>
 
-<!-- Correct answer -->
-<div *ngIf="correctAnswer !== null">
-  <div class="mt-16 flex justify-center items-center">
-    <div
-      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow text-black text-center font-bold"
-    >
-      {{ correctAnswer ? 'Correct Answer' : 'Incorrect Answer' }}
+  <!-- Correct answer -->
+  <div *ngIf="submit === true">
+    <div class="mt-16 flex justify-center items-center">
+      <div
+        class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow text-black text-center font-bold"
+      >
+        {{ correctAnswer ? "Correct Answer" : "Incorrect Answer" }}
+      </div>
     </div>
-  </div>
 
-  <!-- Next button -->
-  <div class="mt-8 flex justify-center">
-    <button
-      type="button"
-      class="p-4 font-medium text-center text-white uppercase bg-gray-800 w-1/10 active:bg-black rounded-xl active:scale-105"
-      (click)="nextQuestion()"
-    >
-      Next
-    </button>
+    <!-- Next button -->
+    <div class="mt-8 flex justify-center">
+      <button
+        type="button"
+        class="p-4 font-medium text-center text-white uppercase bg-gray-800 w-1/10 active:bg-black rounded-xl active:scale-105"
+        (click)="nextQuestion()"
+      >
+        Next
+      </button>
+    </div>
+
   </div>
-</div>
 
 
 </div>

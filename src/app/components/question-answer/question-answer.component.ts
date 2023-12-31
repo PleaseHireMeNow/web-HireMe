@@ -13,8 +13,10 @@ import { Router } from '@angular/router';
 })
 export class QuestionAnswerComponent {
   questions: Question[] = [];
-  currentQuestionIndex: number = 0;
+  currentQuestionIndex: number = 18;
   correctAnswer: boolean|null = null;
+  submit: boolean|null = null;
+  
   
   constructor(private apiService: QuestionService, private router: Router  ) {}
 
@@ -49,7 +51,17 @@ export class QuestionAnswerComponent {
       console.log('question.length', this.questions.length)
       this.currentQuestionIndex++;
       this.correctAnswer = null;
+      this.submit = null;
     }
+  }
+
+  handleSubmit(){
+    if(this.correctAnswer === null){
+      alert('Please select an answer before submitting.');
+      return;
+    }
+    console.log('I clicked submit!', this.correctAnswer)
+    this.submit = true;
   }
 
 }
