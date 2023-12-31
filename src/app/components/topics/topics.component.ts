@@ -1,9 +1,9 @@
 import { Difficulty } from './../../common/models/difficulty';
-import { SelectedTopic } from './../../common/models/selected-topic';
+import { TopicSelection } from '../../common/models/topic-selection';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Topic } from '../../common/models/topic';
-import { QuestionService } from '../../api.service';
+import { ApiService } from '../../api.service';
 // import { Question } from '../../common/models/question';
 import { Router } from '@angular/router';
 
@@ -31,7 +31,7 @@ export class TopicsComponent {
   selectedTopic = emptyTopic;
   selectedDifficulty = emptyDifficulty;
 
-  constructor(private apiService: QuestionService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
     // this.apiService.getAllQuestions().subscribe((data: any) => {

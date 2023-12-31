@@ -3,9 +3,10 @@ import { Injectable } from "@angular/core";
 import { Session } from "./common/models/session";
 import { Answer } from "./common/models/session";
 import { Question } from "./common/models/question";
-import { NewOrPrevSessionService } from "./services/new-or-prev-session.service";
+import { NewOrPrevSessionService } from "./services/sessions/new-or-prev-session.service";
 import { Difficulty } from "./common/models/difficulty";
 import { Topic } from "./common/models/topic";
+import { User } from "./common/models/user";
 
 
 
@@ -13,7 +14,7 @@ import { Topic } from "./common/models/topic";
     providedIn: 'root'
 })
 
-export class QuestionService{
+export class ApiService{
     model = 'Question';
     currentState: any;
     constructor(private http: HttpClient, private NewOrPrevSessionService: NewOrPrevSessionService) {
@@ -41,7 +42,10 @@ export class QuestionService{
     setTopic(topic: Topic, difficulty: Difficulty) {
         console.log('in setTopic')
         return this.http.post<any>('http://localhost:3000/api/topic_selection/pjgoodman', {topic, difficulty}, {observe: 'response'} );
-
     }
-
+    getUserInfo(){
+        const user = this.http.get('http://localhost:3000/api/user/pjgoodman')
+        console.log('user', user)
+        return user
+    }
 }

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QuestionService } from '../../api.service';
+import { ApiService } from '../../api.service';
 import { Question } from '../../common/models/question';
 import { Answer, Session } from '../../common/models/session';
 import { Router } from '@angular/router';
-import { NewOrPrevSessionService } from '../../services/new-or-prev-session.service';
+import { NewOrPrevSessionService } from '../../services/sessions/new-or-prev-session.service';
 
 @Component({
   selector: 'app-question-answer',
@@ -20,7 +20,7 @@ export class QuestionAnswerComponent {
   submit: boolean|null = null;
   currentState: any;
 
-  constructor(private apiService: QuestionService, private router: Router, private NewOrPrevSessionService: NewOrPrevSessionService  ) {
+  constructor(private apiService: ApiService, private router: Router, private NewOrPrevSessionService: NewOrPrevSessionService  ) {
     this.currentState = this.NewOrPrevSessionService.getState();
   }
 
