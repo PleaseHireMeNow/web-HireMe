@@ -5,6 +5,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Session } from '../../../common/models/session';
 import { User } from '../../../common/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-history',
@@ -18,7 +19,7 @@ export class UserHistoryComponent {
   user: User = {} as User;
   sessionHistory: Session[] = [] as Session[];
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private router: Router) {
     this.apiService.getUserInfo().subscribe((data: any) => {
   
     })
@@ -30,6 +31,12 @@ ngOnInit(): void {
       this.sessionHistory = data.session_history as Session[]
       console.log(this.sessionHistory)
     })
+}
+
+selectSession(session: any) {
+  console.log('in selectSession')
+  console.log('session id', this.sessionHistory)
+  // this.router.navigate(['/question'])
 }
 
 

@@ -13,18 +13,19 @@
                 <th scope="col" class="px-6 py-3">
                    Score
                 </th>
+            </tr>
         </thead>
         <tbody>
           @for(session of sessionHistory; track session) {
-            <tr class="bg-white border-b border-secondary">
-              <th scope="row" class="px-6 py-4 font-medium text-accent  dark:text-blue-100">
+            <tr class="bg-white border-b border-secondary" (click)="selectSession(session)">
+              <td scope="row" class="px-6 py-4 font-medium text-accent  dark:text-blue-100">
                 {{session.topic_selection.topic.name}}
-              </th>
+              </td>
               <td class="px-6 py-4">
                 {{session.topic_selection.difficulty.name}}
               </td>
               <td class="px-6 py-4">
-                8/10
+                {{session.answered_correctly}}/10
               </td>
             </tr>
           }

@@ -31,6 +31,10 @@ export class ApiService{
         return sessionQuestion
     }
 
+    getExistingPreviousSession(sessionId: string, requestData: any) {
+        return this.http.put(`http://localhost:3000/api/questions/pjgoodman/${sessionId}`, requestData);
+    }
+
     getAllTopics(){
         return this.http.get('http://localhost:3000/api/topic_options/pjgoodman');
     }
@@ -44,8 +48,7 @@ export class ApiService{
         return this.http.post<any>('http://localhost:3000/api/topic_selection/pjgoodman', {topic, difficulty}, {observe: 'response'} );
     }
     getUserInfo(){
-        const user = this.http.get('http://localhost:3000/api/user/pjgoodman')
-        console.log('user', user)
-        return user
+       return this.http.get('http://localhost:3000/api/user/pjgoodman')
+        
     }
 }
