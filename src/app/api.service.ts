@@ -32,7 +32,7 @@ export class ApiService{
     }
 
     getExistingPreviousSession(sessionId: string, requestData: any) {
-        return this.http.put(`http://localhost:3000/api/questions/pjgoodman/${sessionId}`, requestData);
+        return this.http.put(`http://localhost:3000/api/previous/pjgoodman/${sessionId}`, requestData);
     }
 
     getAllTopics(){

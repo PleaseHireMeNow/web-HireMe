@@ -29,13 +29,13 @@ ngOnInit(): void {
     this.apiService.getUserInfo().subscribe((data: any) => {
       this.user = data as User;
       this.sessionHistory = data.session_history as Session[]
-      console.log(this.sessionHistory)
+      console.log('this.sessionHistory is', this.sessionHistory)
     })
 }
 
 selectSession(session: any) {
   console.log('in selectSession')
-  console.log('session id', this.sessionHistory)
+  console.log('session id', session.session_id)
   // this.router.navigate(['/question'])
 }
 

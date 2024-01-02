@@ -17,7 +17,7 @@
         </thead>
         <tbody>
           @for(session of sessionHistory; track session) {
-            <tr class="bg-white border-b border-secondary" (click)="selectSession(session)">
+            <tr (click)="selectSession(session)" class="bg-white border-b border-secondary" >
               <td scope="row" class="px-6 py-4 font-medium text-accent  dark:text-blue-100">
                 {{session.topic_selection.topic.name}}
               </td>
