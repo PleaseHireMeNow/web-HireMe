@@ -20,8 +20,8 @@ export class UserComponent {
   }
 
   public getPreviousSession = () => {
-    this.NewOrPrevSessionService.setState('prev');
-    console.log('prev')
+    this.NewOrPrevSessionService.setState('current');
+    console.log('current')
     this.currentState = this.NewOrPrevSessionService.getState();
     this.router.navigate(['/question'])
   }

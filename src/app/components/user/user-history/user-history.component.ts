@@ -1,3 +1,4 @@
+import { NewOrPrevSessionService } from './../../../services/sessions/new-or-prev-session.service';
 import { ApiService } from './../../../api.service';
 import { UserService } from './../../../services/user/user.service';
 import { TopicSelection } from '../../../common/models/topic-selection';
@@ -19,8 +20,7 @@ export class UserHistoryComponent {
   user: User = {} as User;
   sessionHistory: Session[] = [] as Session[];
 
-  constructor(private apiService: ApiService, private router: Router) {
-    // this.apiService.getExistingPreviousSession().subscribe
+  constructor(private apiService: ApiService, private router: Router, private newOrPrevSessionService: NewOrPrevSessionService) {
     this.apiService.getUserInfo().subscribe((data: any) => {
   
     })
@@ -37,6 +37,9 @@ ngOnInit(): void {
 selectSession(session: any) {
   console.log('in selectSession')
   console.log('session id', session.session_id)
+  this.newOrPrevSessionService.setPreviousSessionId(session.session_id)
+  this.newOrPrevSessionService.setState('prev')
+  this.router.navigate(['/question'])
 }
 
 }

@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class NewOrPrevSessionService {
 
   public myState: any = 'new';
+  public previousSessionId: string = '';
 
   getState(): any {
     return this.myState;
@@ -15,5 +16,14 @@ export class NewOrPrevSessionService {
     console.log('setState')
     this.myState = newState;
   }
+
+  getPreviousSessionId() {
+    return this.previousSessionId
+  }
+
+  setPreviousSessionId(newPreviousSessionId: string) {
+    this.previousSessionId = newPreviousSessionId
+  }
+
 
 }

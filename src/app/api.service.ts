@@ -17,13 +17,18 @@ import { User } from "./common/models/user";
 export class ApiService{
     model = 'Question';
     currentState: any;
+    sessionId: any;
     constructor(private http: HttpClient, private NewOrPrevSessionService: NewOrPrevSessionService) {
-        this.currentState = this.NewOrPrevSessionService.getState()}
+        this.currentState = this.NewOrPrevSessionService.getState()
+        this.sessionId = this.NewOrPrevSessionService.getPreviousSessionId()
+    }
     getAllQuestions(){
         let sessionQuestion 
         let newSession = this.currentState
         if(newSession === 'new') {
             sessionQuestion = this.http.get('http://localhost:3000/api/questions/current/new/pjgoodman/')
+        } else if (newSession === 'prev'){
+            sessionQuestion = this.http.get(`http://localhost:3000/api/questions/previous/pjgoodman/${this.sessionId}`)
         } else { 
             sessionQuestion = this.http.get('http://localhost:3000/api/questions/current/current/pjgoodman')
         };
@@ -31,8 +36,8 @@ export class ApiService{
         return sessionQuestion
     }
 
-    getExistingPreviousSession(sessionId: string, requestData: any) {
-        return this.http.put(`http://localhost:3000/api/questions/previous/pjgoodman/${sessionId}`, requestData);
+    getExistingPreviousSession(sessionId: string) {
+        return this.http.get(`http://localhost:3000/api/questions/previous/pjgoodman/${sessionId}`);
     }
 
     getAllTopics(){
