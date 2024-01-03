@@ -74,4 +74,8 @@ export class QuestionAnswerComponent {
     this.submit = true;
   }
 
+  navigateToUserPage() {
+    this.router.navigate(['/user']);
+  }
+
 }

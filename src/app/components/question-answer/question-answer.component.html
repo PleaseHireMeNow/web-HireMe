@@ -46,14 +46,24 @@
    <!-- Done  with the  questions -->
   <div *ngIf="currentQuestionIndex  === questions.questions.length">
     <div
-      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto mb-6"
+      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto mb-6 text-accent text-center text-2xl font-bold"
     >
     <img
       src="../../../assets/codedog.gif"
       class="h-auto shadow-md shadow-indigo-500/40 bg-secondary w-96"
       alt="session end"
       /> 
-    <p>All questions are answered! Move to dashboard.</p>
+    <p>Session Complete!</p>
+  
+    </div>
+    <div class="mt-8 flex justify-center">
+      <button
+        type="button"
+        class="p-4 font-medium text-center text-white uppercase bg-gray-800 w-1/10 active:bg-black rounded-xl active:scale-105"
+        (click)="navigateToUserPage()"
+      >
+        Dashboard
+      </button>
     </div>
   </div>
   <!-- dashboard button here? -->
