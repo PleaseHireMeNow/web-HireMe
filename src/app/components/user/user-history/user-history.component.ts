@@ -20,6 +20,7 @@ export class UserHistoryComponent {
   sessionHistory: Session[] = [] as Session[];
 
   constructor(private apiService: ApiService, private router: Router) {
+    // this.apiService.getExistingPreviousSession().subscribe
     this.apiService.getUserInfo().subscribe((data: any) => {
   
     })
@@ -36,8 +37,6 @@ ngOnInit(): void {
 selectSession(session: any) {
   console.log('in selectSession')
   console.log('session id', session.session_id)
-  // this.router.navigate(['/question'])
 }
-
 
 }

@@ -23,16 +23,16 @@ export class ApiService{
         let sessionQuestion 
         let newSession = this.currentState
         if(newSession === 'new') {
-            sessionQuestion = this.http.get('http://localhost:3000/api/questions/pjgoodman/new')
+            sessionQuestion = this.http.get('http://localhost:3000/api/questions/current/new/pjgoodman/')
         } else { 
-            sessionQuestion = this.http.get('http://localhost:3000/api/questions/pjgoodman/prev')
+            sessionQuestion = this.http.get('http://localhost:3000/api/questions/current/current/pjgoodman')
         };
         console.log('sessionQuestion', sessionQuestion)
         return sessionQuestion
     }
 
     getExistingPreviousSession(sessionId: string, requestData: any) {
-        return this.http.put(`http://localhost:3000/api/previous/pjgoodman/${sessionId}`, requestData);
+        return this.http.put(`http://localhost:3000/api/questions/previous/pjgoodman/${sessionId}`, requestData);
     }
 
     getAllTopics(){
