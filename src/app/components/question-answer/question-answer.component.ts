@@ -19,6 +19,7 @@ export class QuestionAnswerComponent {
   correctAnswer: boolean|null = null;
   submit: boolean|null = null;
   currentState: any;
+  clickedAnswer: any;
 
   constructor(private apiService: ApiService, private router: Router, private NewOrPrevSessionService: NewOrPrevSessionService  ) {
     this.currentState = this.NewOrPrevSessionService.getState();
@@ -48,6 +49,7 @@ export class QuestionAnswerComponent {
       console.log('WRONG')
       this.correctAnswer = false;
     }
+    this.clickedAnswer = answer
     this.apiService.sendAnswer(question,answer).subscribe( (res) => {
       console.log('post response', res)
     } ,(error) => {
