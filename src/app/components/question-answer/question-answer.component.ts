@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QuestionService } from '../../api.service';
+import { ApiService } from '../../api.service';
 import { Question } from '../../common/models/question';
 import { Answer, Session } from '../../common/models/session';
 import { Router } from '@angular/router';
-import { NewOrPrevSessionService } from '../../services/new-or-prev-session.service';
+import { NewOrPrevSessionService } from '../../services/sessions/new-or-prev-session.service';
 
 @Component({
   selector: 'app-question-answer',
@@ -19,8 +19,9 @@ export class QuestionAnswerComponent {
   correctAnswer: boolean|null = null;
   submit: boolean|null = null;
   currentState: any;
+  clickedAnswer: any;
 
-  constructor(private apiService: QuestionService, private router: Router, private NewOrPrevSessionService: NewOrPrevSessionService  ) {
+  constructor(private apiService: ApiService, private router: Router, private NewOrPrevSessionService: NewOrPrevSessionService  ) {
     this.currentState = this.NewOrPrevSessionService.getState();
   }
 
@@ -48,6 +49,7 @@ export class QuestionAnswerComponent {
       console.log('WRONG')
       this.correctAnswer = false;
     }
+    this.clickedAnswer = answer
     this.apiService.sendAnswer(question,answer).subscribe( (res) => {
       console.log('post response', res)
     } ,(error) => {
@@ -72,6 +74,10 @@ export class QuestionAnswerComponent {
     }
     console.log('I clicked submit!', this.correctAnswer)
     this.submit = true;
+  }
+
+  navigateToUserPage() {
+    this.router.navigate(['/user']);
   }
 
 }

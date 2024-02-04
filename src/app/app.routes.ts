@@ -9,7 +9,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
 import { TopicsComponent } from './components/topics/topics.component';
 
-import { QuestionService } from './api.service';
+import { ApiService } from './api.service';
 
 const AppRoutes: Routes = [
     { path: 'home', component: HomeComponent,

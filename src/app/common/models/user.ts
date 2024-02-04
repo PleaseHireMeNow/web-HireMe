@@ -1,12 +1,15 @@
-import { CompletedQuestion } from "./question";
-import { Topics } from "./topic";
+// import { CompletedQuestion } from "./question";
+// import { Topic } from "./topic";
+import { AnswerHistory } from "./answer-history";
+import { TopicSelection } from "./topic-selection";
+import { Session } from "./session";
 
 export interface User {
-  userToken: string;
-  userId: string;
+  user_id: string;
   username: string;
-  stack: Topics[];
-  isGuest: boolean;
-  history: CompletedQuestion[];
-  userAnswer: CompletedQuestion;
+  topic_selection: [
+    TopicSelection
+  ];
+  is_guest: boolean;
+  session_history: Session[];
 }

@@ -22,9 +22,9 @@
 //   questionContent: QuestionContent;
 // }
 
-// export interface CompletedQuestion extends Question {
-//   responses: Response[];
-// }
+export interface CompletedQuestion extends Question {
+  responses: Response[];
+}
 
 export interface Question {
   question_id: string;

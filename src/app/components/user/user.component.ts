@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserHistoryComponent } from './user-history/user-history.component';
 import { UserProgressComponent } from './user-progress/user-progress.component';
-import { NewOrPrevSessionService } from '../../services/new-or-prev-session.service';
+import { NewOrPrevSessionService } from '../../services/sessions/new-or-prev-session.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,8 +20,8 @@ export class UserComponent {
   }
 
   public getPreviousSession = () => {
-    this.NewOrPrevSessionService.setState('prev');
-    console.log('prev')
+    this.NewOrPrevSessionService.setState('current');
+    console.log('current')
     this.currentState = this.NewOrPrevSessionService.getState();
     this.router.navigate(['/question'])
   }

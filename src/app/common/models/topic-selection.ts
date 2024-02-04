@@ -1,4 +1,4 @@
-export interface SelectedTopic {
+export interface TopicSelection {
     topic: { 
         name: string;
         iconPath: string;
