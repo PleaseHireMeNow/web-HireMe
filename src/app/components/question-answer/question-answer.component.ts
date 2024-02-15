@@ -31,11 +31,6 @@ export class QuestionAnswerComponent {
       this.currentQuestionIndex = this.questions.current_question
       console.log('Data:', data);
       console.log('this.currentState', this.currentState)
-      // console.log('Questions_id', this.questions[0].questions)
-      // console.log('Questions 1', this.questions[0].question_content.text)
-      // console.log('Question 2:', this.questions[1].question_content.text)
-      // console.log('answer 1:', this.questions[0].question_content.answers[0].answer_content.text)
-      // console.log('answer 2:', this.questions[0].question_content.answers[1].answer_content.text)
     });
   }
 

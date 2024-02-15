@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
+import { User } from '../../common/models/user';
+import { SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,8 +14,11 @@ import { LoginComponent } from '../login/login.component';
   styleUrl: './nav-bar.component.scss'
 })
 export class NavBarComponent {
+  // SocialUser: SocialUser = {} as SocialUser;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    // console.log('SocialUser data:', this.SocialUser);
+  }
 
   handleSettings(){
     console.log('Settings has been clicked')
