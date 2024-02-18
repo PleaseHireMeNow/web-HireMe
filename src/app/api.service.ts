@@ -8,7 +8,9 @@ import { Difficulty } from "./common/models/difficulty";
 import { Topic } from "./common/models/topic";
 import { User } from "./common/models/user";
 
-
+// const headers = new HttpHeaders({
+//     'Authorization': 'Bearer ' + YOUR_ID_TOKEN
+//   });
 
 @Injectable({
     providedIn: 'root'
@@ -56,4 +58,11 @@ export class ApiService{
        return this.http.get('http://localhost:3000/api/user/pjgoodman')
         
     }
+
+    
+
 }
+
+// this.http.get('your-backend-endpoint', { headers: headers }).subscribe(response => {
+//     // Handle the response
+//   });

@@ -1,24 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SocialAuthService, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { LoginService } from '../../services/login/login.service';
 
 @Component({
   selector: 'app-login',
   standalone:true,
   imports:[
     CommonModule,
-    GoogleSigninButtonModule
+    // GoogleSigninButtonModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit{
-  constructor( private authService:SocialAuthService) {}
+  constructor( private loginService: LoginService ) {}
 
   ngOnInit(): void {
-    this.authService.authState.subscribe((socialUser) => {
-      console.log(socialUser)
-      console.log(socialUser.firstName)
-    });
+    this.loginService.logIn()
+    // this.authService.authState.subscribe((socialUser) => {
+    //   console.log(socialUser)
+    //   console.log(socialUser.firstName)
+    // });
   }
 }
