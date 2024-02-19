@@ -17,7 +17,7 @@ export class UserService {
   
   public login(user: User): void {
     this.user.set(user);
-    console.log(this.user())
+    console.log('this.user', this.user())
   }
 
   // getUser(): any {
