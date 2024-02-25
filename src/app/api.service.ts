@@ -1,12 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Session } from '../common/models/session';
-import { Answer } from '../common/models/session';
-import { Question } from '../common/models/question';
-import { NewOrPrevSessionService } from './session/new-or-prev-session.service';
-import { Difficulty } from '../common/models/difficulty';
-import { Topic } from '../common/models/topic';
-import { User } from '../common/models/user';
+import { Session } from './common/models/session';
+import { Answer } from './common/models/session';
+import { Question } from './common/models/question';
+import { NewOrPrevSessionService } from './services/session/new-or-prev-session.service';
+import { Difficulty } from './common/models/difficulty';
+import { Topic } from './common/models/topic';
+import { User } from './common/models/user';
 
 // const headers = new HttpHeaders({
 //     'Authorization': 'Bearer ' + YOUR_ID_TOKEN

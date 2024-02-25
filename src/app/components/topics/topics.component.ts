@@ -38,7 +38,7 @@ export class TopicsComponent {
     console.log(this.userService.user().topic_selection);
     // Check if user has already selected topics
     if (this.userService.user().topic_selection !== undefined) {
-      this.router.navigate(['/question'])
+      this.router.navigate(['/user'])
     }
 
     // Get topics for user to select from

@@ -1,4 +1,4 @@
-import { NewOrPrevSessionService } from './../../../services/sessions/new-or-prev-session.service';
+import { NewOrPrevSessionService } from '../../../services/session/new-or-prev-session.service';
 import { ApiService } from '../../../services/api.service';
 import { UserService } from './../../../services/user/user.service';
 import { TopicSelection } from '../../../common/models/topic-selection';
@@ -13,39 +13,40 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './user-history.component.html',
-  styleUrl: './user-history.component.scss'
+  styleUrl: './user-history.component.scss',
 })
 export class UserHistoryComponent {
   @Input() selectedTopic?: string;
   user: User = {} as User;
   userSignal = computed(() => {
-    return this.userService.user()
-
-  }) 
+    return this.userService.user();
+  });
 
   sessionHistory: Session[] = [] as Session[];
 
-  constructor(private userService: UserService, private apiService: ApiService, private router: Router, private newOrPrevSessionService: NewOrPrevSessionService) {
-    this.apiService.getUserInfo().subscribe((data: any) => {
-  
-    })
+  constructor(
+    private userService: UserService,
+    private apiService: ApiService,
+    private router: Router,
+    private newOrPrevSessionService: NewOrPrevSessionService
+  ) {
+    this.apiService.getUserInfo().subscribe((data: any) => {});
   }
 
-ngOnInit(): void {
+  ngOnInit(): void {
     this.apiService.getUserInfo().subscribe((data: any) => {
       this.user = data as User;
-      this.sessionHistory = data.session_history as Session[]
-      console.log('this.sessionHistory is', this.sessionHistory)
-      console.log(this.userSignal())
-    })
-}
+      this.sessionHistory = data.session_history as Session[];
+      console.log('this.sessionHistory is', this.sessionHistory);
+      console.log(this.userSignal());
+    });
+  }
 
-selectSession(session: any) {
-  console.log('in selectSession')
-  console.log('session id', session.session_id)
-  this.newOrPrevSessionService.setPreviousSessionId(session.session_id)
-  this.newOrPrevSessionService.setState('prev')
-  this.router.navigate(['/question'])
-}
-
+  selectSession(session: any) {
+    console.log('in selectSession');
+    console.log('session id', session.session_id);
+    this.newOrPrevSessionService.setPreviousSessionId(session.session_id);
+    this.newOrPrevSessionService.setState('prev');
+    this.router.navigate(['/question']);
+  }
 }
