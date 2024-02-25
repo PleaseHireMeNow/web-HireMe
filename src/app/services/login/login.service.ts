@@ -3,12 +3,13 @@ import { initializeApp } from 'firebase/app';
 import { Injectable } from '@angular/core';
 import { UserService } from '../user/user.service';
 import { User } from '../../common/models/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
 
   }
   // Initialize Firebase app with your Firebase project configuration
@@ -31,7 +32,7 @@ export class LoginService {
   auth = getAuth();
 
   // Handle sign-in with a pop-up window
-  logIn() {
+  async logIn() {
     signInWithPopup(this.auth, this.provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access Google APIs.
@@ -42,10 +43,13 @@ export class LoginService {
         // The signed-in user info.
         const user = result.user;
         console.log(Object.keys(user));
-        this.userService.login(user as User);
+        // this.userService.login(user as User);
 
         // Additional actions after successful sign-in
         console.log('User signed in:', user);
+
+        // Navigate somewhere
+        this.router.navigate(['/topics'])
       })
       .catch((error) => {
         // Handle Errors here.
