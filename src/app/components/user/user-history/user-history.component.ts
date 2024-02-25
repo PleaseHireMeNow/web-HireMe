@@ -1,5 +1,5 @@
 import { NewOrPrevSessionService } from './../../../services/sessions/new-or-prev-session.service';
-import { ApiService } from './../../../api.service';
+import { ApiService } from '../../../services/api.service';
 import { UserService } from './../../../services/user/user.service';
 import { TopicSelection } from '../../../common/models/topic-selection';
 import { Component, Input, computed } from '@angular/core';

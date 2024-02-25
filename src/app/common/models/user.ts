@@ -14,7 +14,7 @@ export interface User {
     TopicSelection
   ];
   is_guest?: boolean;
-  session_history?: Session[];
+  session_history: Session[];
   displayName: string;
   accessToken?: string;
   uid: string;

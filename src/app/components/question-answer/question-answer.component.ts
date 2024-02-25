@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../api.service';
+import { ApiService } from '../../services/api.service';
 import { Question } from '../../common/models/question';
 import { Answer, Session } from '../../common/models/session';
 import { Router } from '@angular/router';
 import { NewOrPrevSessionService } from '../../services/sessions/new-or-prev-session.service';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-question-answer',
@@ -21,17 +22,31 @@ export class QuestionAnswerComponent {
   currentState: any;
   clickedAnswer: any;
 
-  constructor(private apiService: ApiService, private router: Router, private NewOrPrevSessionService: NewOrPrevSessionService  ) {
+  constructor(private apiService: ApiService, private router: Router, private NewOrPrevSessionService: NewOrPrevSessionService, private userService: UserService  ) {
     this.currentState = this.NewOrPrevSessionService.getState();
   }
 
   ngOnInit(): void {
-    this.apiService.getAllQuestions().subscribe((data: any) => {
-      this.questions = data;
-      this.currentQuestionIndex = this.questions.current_question
-      console.log('Data:', data);
-      console.log('this.currentState', this.currentState)
-    });
+    if (this.userService.user().session_history !== undefined) {
+      if (this.userService.user().session_history.length === 0) {
+        // this.somethingservice.getnewsession();
+      }
+      // look at the most recent session
+      const mostRecentSession = this.userService.user().session_history[0]
+      // if it's already done, get a new one
+      if (mostRecentSession.current_question+1 === mostRecentSession.questions.length) {
+          // this.somethingservice.getnewsession();
+      } else {
+        // put the most recent session into the questions signal
+      }
+    
+    }
+    // this.apiService.getAllQuestions().subscribe((data: any) => {
+    //   this.questions = data;
+    //   this.currentQuestionIndex = this.questions.current_question
+    //   console.log('Data:', data);
+    //   console.log('this.currentState', this.currentState)
+    // });
   }
 
   handleAnswer(question: Question, answer: Answer){
