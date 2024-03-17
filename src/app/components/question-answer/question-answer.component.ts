@@ -59,7 +59,7 @@ export class QuestionAnswerComponent {
     // });
   
 
-  handleAnswer(question: Question, answer: Answer) {
+  async handleAnswer(question: Question, answer: Answer) {
     console.log('This answer has been selected', answer);
     if (answer.is_correct) {
       console.log('You are correct');
@@ -69,14 +69,8 @@ export class QuestionAnswerComponent {
       this.correctAnswer = false;
     }
     this.clickedAnswer = answer;
-    this.apiService.sendAnswer(question, answer).subscribe(
-      (res) => {
+    let res = await this.apiService.sendAnswer(question, answer)
         console.log('post response', res);
-      },
-      (error) => {
-        console.log('error', error);
-      }
-    );
   }
 
   nextQuestion() {

@@ -7,6 +7,7 @@ import { NewOrPrevSessionService } from './session/new-or-prev-session.service';
 import { Difficulty } from '../common/models/difficulty';
 import { Topic } from '../common/models/topic';
 import { User } from '../common/models/user';
+import axios from 'axios';
 
 // const headers = new HttpHeaders({
 //     'Authorization': 'Bearer ' + YOUR_ID_TOKEN
@@ -20,7 +21,6 @@ export class ApiService {
   currentState: any;
   sessionId: any;
   constructor(
-    private http: HttpClient,
     private NewOrPrevSessionService: NewOrPrevSessionService
   ) {
     this.currentState = this.NewOrPrevSessionService.getState();
@@ -30,15 +30,15 @@ export class ApiService {
     let sessionQuestion;
     let newSession = this.currentState;
     if (newSession === 'new') {
-      sessionQuestion = this.http.get(
+      sessionQuestion = axios.get(
         'http://localhost:3000/api/questions/current/new/pjgoodman/'
       );
     } else if (newSession === 'prev') {
-      sessionQuestion = this.http.get(
+      sessionQuestion = axios.get(
         `http://localhost:3000/api/questions/previous/pjgoodman/${this.sessionId}`
       );
     } else {
-      sessionQuestion = this.http.get(
+      sessionQuestion = axios.get(
         'http://localhost:3000/api/questions/current/current/pjgoodman'
       );
     }
@@ -47,33 +47,33 @@ export class ApiService {
   }
 
   getExistingPreviousSession(sessionId: string) {
-    return this.http.get(
+    return axios.get(
       `http://localhost:3000/api/questions/previous/pjgoodman/${sessionId}`
     );
   }
 
   getAllTopics() {
-    return this.http.get('http://localhost:3000/api/topic_options/pjgoodman');
+    return axios.get('http://localhost:3000/api/topic_options/pjgoodman');
   }
 
   sendAnswer(question: Question, answer: Answer) {
-    return this.http.post<any>(
+    return axios.post(
       'http://localhost:3000/api/answer_history/pjgoodman',
       { question, answer },
-      { observe: 'response' }
+      // { observe: 'response' }
     );
   }
 
   setTopic(topic: Topic, difficulty: Difficulty) {
     console.log('in setTopic');
-    return this.http.post<any>(
+    return axios.post<any>(
       'http://localhost:3000/api/topic_selection/pjgoodman',
       { topic, difficulty },
-      { observe: 'response' }
+      // { observe: 'response' }
     );
   }
   getUserInfo() {
-    return this.http.get('http://localhost:3000/api/user/pjgoodman');
+    return axios.get('http://localhost:3000/api/user/pjgoodman');
   }
 
   getNewSession() {
@@ -81,6 +81,6 @@ export class ApiService {
   }
 }
 
-// this.http.get('your-backend-endpoint', { headers: headers }).subscribe(response => {
+// axios.get('your-backend-endpoint', { headers: headers }).subscribe(response => {
 //     // Handle the response
 //   });
