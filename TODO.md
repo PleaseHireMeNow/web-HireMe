@@ -9,3 +9,5 @@
 ## Signals
     -replace subscribe with signals
     
+## Refactor ApiService
+    - add async & awaits to functions 

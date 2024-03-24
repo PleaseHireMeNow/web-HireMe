@@ -8,6 +8,9 @@ import { Topic } from '../common/models/topic';
 import { User } from '../common/models/user';
 import axios from 'axios';
 import { SessionService } from './session/session.service';
+import { TopicsService } from './topics/topics.service';
+import { TopicSelection } from '../common/models/topic-selection';
+import { TopicOptions } from '../common/models/topic-options';
 
 // const headers = new HttpHeaders({
 //     'Authorization': 'Bearer ' + YOUR_ID_TOKEN
@@ -21,7 +24,8 @@ export class ApiService {
   currentState: any;
   sessionId: any;
   constructor(
-    private SessionService: SessionService
+    private SessionService: SessionService,
+    private TopicsService: TopicsService
   ) {
     this.sessionId = this.SessionService.session().session_id;
   }
@@ -51,8 +55,9 @@ export class ApiService {
     );
   }
 
-  getAllTopics() {
-    return axios.get('http://localhost:3000/api/topic_options/pjgoodman');
+  async getAllTopics() {
+    const response = await axios.get('http://localhost:3000/api/topic_options/pjgoodman') as TopicOptions;
+    this.TopicsService.topicOptions.set(response)
   }
 
   sendAnswer(question: Question, answer: Answer) {
