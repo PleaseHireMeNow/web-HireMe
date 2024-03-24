@@ -25,12 +25,12 @@ export class UserComponent {
   }
 
   public getPreviousSession = () => {
-    this.NewOrPrevSessionService.setState('current');
+    this.SessionService.sessionType.set('current');
     console.log('current');
     this.currentState = this.SessionService.sessionType();
     this.router.navigate(['/question']);
   };
   public getNewSession = () => {
-    this.NewOrPrevSessionService.setState('new');
+    this.SessionService.sessionType.set('new');
   };
 }

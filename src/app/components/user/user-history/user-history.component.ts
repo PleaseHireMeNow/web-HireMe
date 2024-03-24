@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { Session } from '../../../common/models/session';
 import { User } from '../../../common/models/user';
 import { Router } from '@angular/router';
+import { SessionService } from '../../../services/session/session.service';
 
 @Component({
   selector: 'app-user-history',
@@ -28,6 +29,7 @@ export class UserHistoryComponent {
     private userService: UserService,
     private apiService: ApiService,
     private router: Router,
+    private SessionService: SessionService,
     private newOrPrevSessionService: NewOrPrevSessionService
   ) {
     this.apiService.getUserInfo().subscribe((data: any) => {});
@@ -46,7 +48,7 @@ export class UserHistoryComponent {
     console.log('in selectSession');
     console.log('session id', session.session_id);
     this.newOrPrevSessionService.setPreviousSessionId(session.session_id);
-    this.newOrPrevSessionService.setState('prev');
+    this.SessionService.sessionType.set('old');
     this.router.navigate(['/question']);
   }
 }

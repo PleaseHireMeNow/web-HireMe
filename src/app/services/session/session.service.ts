@@ -8,7 +8,7 @@ import { ApiService } from '../api.service';
 })
 export class SessionService {
   session = signal({} as Session);
-  sessionType = signal('new' as 'new' | 'old');
+  sessionType = signal('new' as 'new' | 'old' | 'current');
 
   constructor(private apiService: ApiService) {}
 
