@@ -8,6 +8,7 @@ import { Difficulty } from '../common/models/difficulty';
 import { Topic } from '../common/models/topic';
 import { User } from '../common/models/user';
 import axios from 'axios';
+import { SessionService } from './session/session.service';
 
 // const headers = new HttpHeaders({
 //     'Authorization': 'Bearer ' + YOUR_ID_TOKEN
@@ -21,19 +22,19 @@ export class ApiService {
   currentState: any;
   sessionId: any;
   constructor(
-    private NewOrPrevSessionService: NewOrPrevSessionService
+    private NewOrPrevSessionService: NewOrPrevSessionService,
+    private SessionService: SessionService
   ) {
-    this.currentState = this.NewOrPrevSessionService.getState();
     this.sessionId = this.NewOrPrevSessionService.getPreviousSessionId();
   }
   getAllQuestions() {
     let sessionQuestion;
-    let newSession = this.currentState;
+    let newSession = this.SessionService.sessionType();
     if (newSession === 'new') {
       sessionQuestion = axios.get(
         'http://localhost:3000/api/questions/current/new/pjgoodman/'
       );
-    } else if (newSession === 'prev') {
+    } else if (newSession === 'old') {
       sessionQuestion = axios.get(
         `http://localhost:3000/api/questions/previous/pjgoodman/${this.sessionId}`
       );

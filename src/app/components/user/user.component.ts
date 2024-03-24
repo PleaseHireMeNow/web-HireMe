@@ -4,6 +4,7 @@ import { UserHistoryComponent } from './user-history/user-history.component';
 import { UserProgressComponent } from './user-progress/user-progress.component';
 import { NewOrPrevSessionService } from '../../services/session/new-or-prev-session.service';
 import { Router } from '@angular/router';
+import { SessionService } from '../../services/session/session.service';
 
 @Component({
   selector: 'app-user',
@@ -16,16 +17,17 @@ export class UserComponent {
   currentState: any;
 
   constructor(
+    private SessionService: SessionService,
     private NewOrPrevSessionService: NewOrPrevSessionService,
     private router: Router
   ) {
-    this.currentState = this.NewOrPrevSessionService.getState();
+    this.currentState = this.SessionService.sessionType();
   }
 
   public getPreviousSession = () => {
     this.NewOrPrevSessionService.setState('current');
     console.log('current');
-    this.currentState = this.NewOrPrevSessionService.getState();
+    this.currentState = this.SessionService.sessionType();
     this.router.navigate(['/question']);
   };
   public getNewSession = () => {

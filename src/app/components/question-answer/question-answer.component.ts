@@ -30,7 +30,7 @@ export class QuestionAnswerComponent {
     private userService: UserService,
     private sessionService: SessionService
   ) {
-    this.currentState = this.NewOrPrevSessionService.getState();
+    this.currentState = this.sessionService.sessionType();
   }
 
   ngOnInit(): void {
