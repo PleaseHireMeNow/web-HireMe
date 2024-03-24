@@ -4,7 +4,6 @@ import { ApiService } from '../../services/api.service';
 import { Question } from '../../common/models/question';
 import { Answer, Session } from '../../common/models/session';
 import { Router } from '@angular/router';
-import { NewOrPrevSessionService } from '../../services/session/new-or-prev-session.service';
 import { UserService } from '../../services/user/user.service';
 import { SessionService } from '../../services/session/session.service';
 
@@ -26,7 +25,6 @@ export class QuestionAnswerComponent {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private NewOrPrevSessionService: NewOrPrevSessionService,
     private userService: UserService,
     private sessionService: SessionService
   ) {

@@ -1,4 +1,4 @@
-import { NewOrPrevSessionService } from '../../../services/session/new-or-prev-session.service';
+
 import { ApiService } from '../../../services/api.service';
 import { UserService } from './../../../services/user/user.service';
 import { TopicSelection } from '../../../common/models/topic-selection';
@@ -30,7 +30,6 @@ export class UserHistoryComponent {
     private apiService: ApiService,
     private router: Router,
     private SessionService: SessionService,
-    private newOrPrevSessionService: NewOrPrevSessionService
   ) {
     this.apiService.getUserInfo().subscribe((data: any) => {});
   }
@@ -44,10 +43,12 @@ export class UserHistoryComponent {
     });
   }
 
-  selectSession(session: any) {
+  selectSession(session: Session) {
     console.log('in selectSession');
     console.log('session id', session.session_id);
-    this.newOrPrevSessionService.setPreviousSessionId(session.session_id);
+
+
+    this.SessionService.session.set(session);
     this.SessionService.sessionType.set('old');
     this.router.navigate(['/question']);
   }

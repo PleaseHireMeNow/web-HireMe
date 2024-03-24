@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserHistoryComponent } from './user-history/user-history.component';
 import { UserProgressComponent } from './user-progress/user-progress.component';
-import { NewOrPrevSessionService } from '../../services/session/new-or-prev-session.service';
 import { Router } from '@angular/router';
 import { SessionService } from '../../services/session/session.service';
 
@@ -18,7 +17,6 @@ export class UserComponent {
 
   constructor(
     private SessionService: SessionService,
-    private NewOrPrevSessionService: NewOrPrevSessionService,
     private router: Router
   ) {
     this.currentState = this.SessionService.sessionType();

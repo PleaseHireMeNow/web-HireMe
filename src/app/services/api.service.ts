@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Session } from '../common/models/session';
 import { Answer } from '../common/models/session';
 import { Question } from '../common/models/question';
-import { NewOrPrevSessionService } from './session/new-or-prev-session.service';
 import { Difficulty } from '../common/models/difficulty';
 import { Topic } from '../common/models/topic';
 import { User } from '../common/models/user';
@@ -22,10 +21,9 @@ export class ApiService {
   currentState: any;
   sessionId: any;
   constructor(
-    private NewOrPrevSessionService: NewOrPrevSessionService,
     private SessionService: SessionService
   ) {
-    this.sessionId = this.NewOrPrevSessionService.getPreviousSessionId();
+    this.sessionId = this.SessionService.session().session_id;
   }
   getAllQuestions() {
     let sessionQuestion;
