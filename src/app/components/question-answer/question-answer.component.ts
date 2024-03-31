@@ -31,30 +31,19 @@ export class QuestionAnswerComponent {
     this.currentState = this.sessionService.sessionType();
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     
-      if (this.userService.user().session_history.length === 0) {
-        // this.somethingservice.getnewsession();
-      }
-      // look at the most recent session
-      const mostRecentSession = this.userService.user().session_history[0];
-      // if it's already done, get a new one
-      if (
-        mostRecentSession.current_question + 1 ===
-        mostRecentSession.questions.length
-      ) {
-        // this.somethingservice.getnewsession();
-      } else {
-        this.sessionService.session.set(mostRecentSession);
+      // Has session, is in the middle of it
+      // Else needs a new session (no session | complete session)
+      const session_history = this.userService.user().session_history
+
+      if (session_history[0].current_question + 1 < session_history[0].questions.length) {
         // put the most recent session into the questions signal
+        this.sessionService.session.set(session_history[0]);
+      } else {
+        await this.apiService.getNewSession()
       }
     }
-    // this.apiService.getAllQuestions().subscribe((data: any) => {
-    //   this.questions = data;
-    //   this.currentQuestionIndex = this.questions.current_question
-    //   console.log('Data:', data);
-    //   console.log('this.currentState', this.currentState)
-    // });
   
 
   async handleAnswer(question: Question, answer: Answer) {
