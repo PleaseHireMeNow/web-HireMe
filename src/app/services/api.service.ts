@@ -25,20 +25,10 @@ export class ApiService {
   currentState: any;
   sessionId: any;
   userId: any;
-  userId: any;
   constructor(
-    // private SessionService: SessionService,
-    // private TopicsService: TopicsService,
-    // private UserService: UserService
   ) {
-    this.sessionId = this.SessionService.session().session_id;
-    this.userId = this.UserService.user().user_id;
-    this.userId = this.UserService.user().user_id;
+  
   }
-
-  serverAddress = 'http://localhost:3000'
-
-  async getAllQuestions() {
 
   serverAddress = 'http://localhost:3000'
 
@@ -48,18 +38,12 @@ export class ApiService {
     if (newSession === 'new') {
       sessionQuestion = await axios.get(
         `${this.serverAddress}/api/questions/current/new/${this.userId}/`
-      sessionQuestion = await axios.get(
-        `${this.serverAddress}/api/questions/current/new/${this.userId}/`
       );
     } else if (newSession === 'old') {
       sessionQuestion = await axios.get(
         `${this.serverAddress}/api/questions/previous/${this.userId}/${this.sessionId}`
-      sessionQuestion = await axios.get(
-        `${this.serverAddress}/api/questions/previous/${this.userId}/${this.sessionId}`
       );
     } else {
-      sessionQuestion = await axios.get(
-        `${this.serverAddress}/api/questions/current/current/${this.userId}`
       sessionQuestion = await axios.get(
         `${this.serverAddress}/api/questions/current/current/${this.userId}`
       );
@@ -68,50 +52,39 @@ export class ApiService {
     return sessionQuestion;
   }
 
-  getExistingPreviousSession(sessionId: string) {
-    return axios.get(
-      `${this.serverAddress}/api/questions/previous/${this.userId}/${sessionId}`
+  async getExistingPreviousSession(sessionId: string) {
+    return await axios.get(
       `${this.serverAddress}/api/questions/previous/${this.userId}/${sessionId}`
     );
   }
 
   async getAllTopics() {
     const response: TopicOptions = await axios.get(`${this.serverAddress}/api/topic_options/${this.userId}`);
-    const response: TopicOptions = await axios.get(`${this.serverAddress}/api/topic_options/${this.userId}`);
     this.TopicsService.topicOptions.set(response)
   }
 
   async sendAnswer(question: Question, answer: Answer) {
-    await axios.post(
+    return await axios.post(
       `${this.serverAddress}/api/answer_history/${this.userId}`,
       { question, answer },
       // { observe: 'response' }
     );
   }
 
-  setTopic(topic: Topic, difficulty: Difficulty) {
+  async setTopic(topic: Topic, difficulty: Difficulty) {
     console.log('in setTopic');
-    return axios.post<any>(
-      `${this.serverAddress}/api/topic_selection/${this.userId}`,
+    return await axios.post<any>(
       `${this.serverAddress}/api/topic_selection/${this.userId}`,
       { topic, difficulty },
       // { observe: 'response' }
     );
   }
-  getUserInfo() {
-    return axios.get(`${this.serverAddress}/api/user/${this.userId}`);
-    return axios.get(`${this.serverAddress}/api/user/${this.userId}`);
+  async getUserInfo() {
+    return await axios.get(`${this.serverAddress}/api/user/${this.userId}`);
   }
 
-  async getNewSession() {
-    const response: Session = await axios.get(`${this.serverAddress}/api/questions/current/new/${this.userId}/`)
-    this.SessionService.session.set(response)
   async getNewSession() {
     const response: Session = await axios.get(`${this.serverAddress}/api/questions/current/new/${this.userId}/`)
     this.SessionService.session.set(response)
   }
 }
-
-// axios.get('your-backend-endpoint', { headers: headers }).subscribe(response => {
-//     // Handle the response
-//   });
