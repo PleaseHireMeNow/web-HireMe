@@ -11,6 +11,7 @@ import { SessionService } from './session/session.service';
 import { TopicsService } from './topics/topics.service';
 import { TopicSelection } from '../common/models/topic-selection';
 import { TopicOptions } from '../common/models/topic-options';
+import { UserService } from './user/user.service';
 
 // const headers = new HttpHeaders({
 //     'Authorization': 'Bearer ' + YOUR_ID_TOKEN
@@ -23,26 +24,32 @@ export class ApiService {
   model = 'Question';
   currentState: any;
   sessionId: any;
+  userId: any;
   constructor(
     private SessionService: SessionService,
-    private TopicsService: TopicsService
+    private TopicsService: TopicsService,
+    private UserService: UserService
   ) {
     this.sessionId = this.SessionService.session().session_id;
+    this.userId = this.UserService.user().user_id;
   }
-  getAllQuestions() {
+
+  serverAddress = 'http://localhost:3000'
+
+  async getAllQuestions() {
     let sessionQuestion;
     let newSession = this.SessionService.sessionType();
     if (newSession === 'new') {
-      sessionQuestion = axios.get(
-        'http://localhost:3000/api/questions/current/new/pjgoodman/'
+      sessionQuestion = await axios.get(
+        `${this.serverAddress}/api/questions/current/new/${this.userId}/`
       );
     } else if (newSession === 'old') {
-      sessionQuestion = axios.get(
-        `http://localhost:3000/api/questions/previous/pjgoodman/${this.sessionId}`
+      sessionQuestion = await axios.get(
+        `${this.serverAddress}/api/questions/previous/${this.userId}/${this.sessionId}`
       );
     } else {
-      sessionQuestion = axios.get(
-        'http://localhost:3000/api/questions/current/current/pjgoodman'
+      sessionQuestion = await axios.get(
+        `${this.serverAddress}/api/questions/current/current/${this.userId}`
       );
     }
     console.log('sessionQuestion', sessionQuestion);
@@ -51,18 +58,18 @@ export class ApiService {
 
   getExistingPreviousSession(sessionId: string) {
     return axios.get(
-      `http://localhost:3000/api/questions/previous/pjgoodman/${sessionId}`
+      `${this.serverAddress}/api/questions/previous/${this.userId}/${sessionId}`
     );
   }
 
   async getAllTopics() {
-    const response = await axios.get('http://localhost:3000/api/topic_options/pjgoodman') as TopicOptions;
+    const response: TopicOptions = await axios.get(`${this.serverAddress}/api/topic_options/${this.userId}`);
     this.TopicsService.topicOptions.set(response)
   }
 
   sendAnswer(question: Question, answer: Answer) {
     return axios.post(
-      'http://localhost:3000/api/answer_history/pjgoodman',
+      `${this.serverAddress}/api/answer_history/${this.userId}`,
       { question, answer },
       // { observe: 'response' }
     );
@@ -71,17 +78,18 @@ export class ApiService {
   setTopic(topic: Topic, difficulty: Difficulty) {
     console.log('in setTopic');
     return axios.post<any>(
-      'http://localhost:3000/api/topic_selection/pjgoodman',
+      `${this.serverAddress}/api/topic_selection/${this.userId}`,
       { topic, difficulty },
       // { observe: 'response' }
     );
   }
   getUserInfo() {
-    return axios.get('http://localhost:3000/api/user/pjgoodman');
+    return axios.get(`${this.serverAddress}/api/user/${this.userId}`);
   }
 
-  getNewSession() {
-    
+  async getNewSession() {
+    const response: Session = await axios.get(`${this.serverAddress}/api/questions/current/new/${this.userId}/`)
+    this.SessionService.session.set(response)
   }
 }
 

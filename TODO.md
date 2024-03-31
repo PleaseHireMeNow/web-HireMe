@@ -11,3 +11,11 @@
     
 ## Refactor ApiService
     - add async & awaits to functions 
+    - add parameters to api service functions (ex: session history, user_id)
+
+## Move serverAddress in apiService to state 
+    - make into a dynamic signal
+
+## Refactor components to call Services layer instead of Api layer
+    - ie: handleAnswer
+    - 
