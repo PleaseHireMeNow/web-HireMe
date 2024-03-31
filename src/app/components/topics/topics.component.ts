@@ -28,7 +28,6 @@ const emptyDifficulty: Difficulty = {
   styleUrl: './topics.component.scss',
 })
 export class TopicsComponent {
-  // // questions: Question[] = [];
   topicOptions: Topic[] = this.TopicsService.topicOptions().topics;
   difficultyOptions: Difficulty[] = this.TopicsService.topicOptions().difficulties;
   selectedTopic = emptyTopic;
