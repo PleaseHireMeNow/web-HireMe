@@ -1,7 +1,7 @@
 ✅ ## Replace newOrPrevSessionService with a signal in the session service file and then update all dependencies
 
 ## Question-Answer component    
-    -replace pseudo code on ng oninit
+    ✅ -replace pseudo code on ng oninit
 
 ## Nav-bar component
     -access user data for dropdown    
