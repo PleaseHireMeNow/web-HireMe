@@ -8,7 +8,6 @@ import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 import { TopicsService } from '../../services/topics/topics.service';
-import { TopicOptions } from '../../common/models/topic-options';
 
 const emptyTopic: Topic = {
   name: '',

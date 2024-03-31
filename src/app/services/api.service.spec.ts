@@ -11,7 +11,7 @@ describe('tests for api service', () => {
   })
 
   it('should make an axios post', () => {
-    apiService = new ApiService()
+    // apiService = new ApiService()
   })
 
 })

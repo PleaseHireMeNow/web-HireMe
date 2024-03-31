@@ -19,3 +19,10 @@
 ## Refactor components to call Services layer instead of Api layer
     - ie: handleAnswer
     - 
+
+## clean up models 
+    - remove extra comments
+
+
+## Refactor api service to not include dependencies
+    - eg SessionService

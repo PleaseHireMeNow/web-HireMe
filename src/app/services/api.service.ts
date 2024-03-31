@@ -26,9 +26,9 @@ export class ApiService {
   sessionId: any;
   userId: any;
   constructor(
-    private SessionService: SessionService,
-    private TopicsService: TopicsService,
-    private UserService: UserService
+    // private SessionService: SessionService,
+    // private TopicsService: TopicsService,
+    // private UserService: UserService
   ) {
     this.sessionId = this.SessionService.session().session_id;
     this.userId = this.UserService.user().user_id;
@@ -67,8 +67,8 @@ export class ApiService {
     this.TopicsService.topicOptions.set(response)
   }
 
-  sendAnswer(question: Question, answer: Answer) {
-    return axios.post(
+  async sendAnswer(question: Question, answer: Answer) {
+    await axios.post(
       `${this.serverAddress}/api/answer_history/${this.userId}`,
       { question, answer },
       // { observe: 'response' }
