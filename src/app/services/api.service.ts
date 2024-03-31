@@ -25,6 +25,7 @@ export class ApiService {
   currentState: any;
   sessionId: any;
   userId: any;
+  userId: any;
   constructor(
     // private SessionService: SessionService,
     // private TopicsService: TopicsService,
@@ -32,7 +33,12 @@ export class ApiService {
   ) {
     this.sessionId = this.SessionService.session().session_id;
     this.userId = this.UserService.user().user_id;
+    this.userId = this.UserService.user().user_id;
   }
+
+  serverAddress = 'http://localhost:3000'
+
+  async getAllQuestions() {
 
   serverAddress = 'http://localhost:3000'
 
@@ -42,12 +48,18 @@ export class ApiService {
     if (newSession === 'new') {
       sessionQuestion = await axios.get(
         `${this.serverAddress}/api/questions/current/new/${this.userId}/`
+      sessionQuestion = await axios.get(
+        `${this.serverAddress}/api/questions/current/new/${this.userId}/`
       );
     } else if (newSession === 'old') {
       sessionQuestion = await axios.get(
         `${this.serverAddress}/api/questions/previous/${this.userId}/${this.sessionId}`
+      sessionQuestion = await axios.get(
+        `${this.serverAddress}/api/questions/previous/${this.userId}/${this.sessionId}`
       );
     } else {
+      sessionQuestion = await axios.get(
+        `${this.serverAddress}/api/questions/current/current/${this.userId}`
       sessionQuestion = await axios.get(
         `${this.serverAddress}/api/questions/current/current/${this.userId}`
       );
@@ -59,10 +71,12 @@ export class ApiService {
   getExistingPreviousSession(sessionId: string) {
     return axios.get(
       `${this.serverAddress}/api/questions/previous/${this.userId}/${sessionId}`
+      `${this.serverAddress}/api/questions/previous/${this.userId}/${sessionId}`
     );
   }
 
   async getAllTopics() {
+    const response: TopicOptions = await axios.get(`${this.serverAddress}/api/topic_options/${this.userId}`);
     const response: TopicOptions = await axios.get(`${this.serverAddress}/api/topic_options/${this.userId}`);
     this.TopicsService.topicOptions.set(response)
   }
@@ -79,14 +93,19 @@ export class ApiService {
     console.log('in setTopic');
     return axios.post<any>(
       `${this.serverAddress}/api/topic_selection/${this.userId}`,
+      `${this.serverAddress}/api/topic_selection/${this.userId}`,
       { topic, difficulty },
       // { observe: 'response' }
     );
   }
   getUserInfo() {
     return axios.get(`${this.serverAddress}/api/user/${this.userId}`);
+    return axios.get(`${this.serverAddress}/api/user/${this.userId}`);
   }
 
+  async getNewSession() {
+    const response: Session = await axios.get(`${this.serverAddress}/api/questions/current/new/${this.userId}/`)
+    this.SessionService.session.set(response)
   async getNewSession() {
     const response: Session = await axios.get(`${this.serverAddress}/api/questions/current/new/${this.userId}/`)
     this.SessionService.session.set(response)
