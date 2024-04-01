@@ -5,11 +5,19 @@ import { TopicSelection } from "./topic-selection";
 import { Session } from "./session";
 
 export interface User {
-  user_id: string;
-  username: string;
-  topic_selection: [
+  user_id?: string;
+  username?: string;
+  idToken?: string;
+  photoUrl?: string;
+  email: string;
+  topic_selection?: [
     TopicSelection
   ];
-  is_guest: boolean;
+  is_guest?: boolean;
   session_history: Session[];
+  displayName: string;
+  accessToken?: string;
+  uid: string;
 }
+
+

@@ -1,10 +1,7 @@
+import { Difficulty } from "./difficulty";
+import { Topic } from "./topic";
+
 export interface TopicSelection {
-    topic: { 
-        name: string;
-        iconPath: string;
-    },
-    difficulty: {
-        name: string;
-        iconPath: string;
-    }
+    topic: Topic,
+    difficulty: Difficulty
   }

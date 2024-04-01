@@ -3,9 +3,11 @@ import { TopicSelection } from '../../common/models/topic-selection';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Topic } from '../../common/models/topic';
-import { ApiService } from '../../api.service';
+import { ApiService } from '../../services/api.service';
 // import { Question } from '../../common/models/question';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user/user.service';
+import { TopicsService } from '../../services/topics/topics.service';
 
 const emptyTopic: Topic = {
   name: '',
@@ -25,27 +27,27 @@ const emptyDifficulty: Difficulty = {
   styleUrl: './topics.component.scss',
 })
 export class TopicsComponent {
-  // questions: Question[] = [];
-  topics: Topic[] = [];
-  difficulty: Difficulty[] = [];
+  topicOptions: Topic[] = this.TopicsService.topicOptions().topics;
+  difficultyOptions: Difficulty[] = this.TopicsService.topicOptions().difficulties;
   selectedTopic = emptyTopic;
   selectedDifficulty = emptyDifficulty;
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(
+    private apiService: ApiService, 
+    private router: Router, 
+    private userService: UserService, 
+    private TopicsService: TopicsService
+    ) {}
 
-  ngOnInit(): void {
-    // this.apiService.getAllQuestions().subscribe((data: any) => {
-    //   this.questions = data;
-    //   console.log('data:', data);
-    // });
+  async ngOnInit() {    
+    console.log(this.userService.user().topic_selection);
+    // Check if user has already selected topics
+    if (this.userService.user().topic_selection !== undefined) {
+      this.router.navigate(['/user'])
+    }
 
-    this.apiService.getAllTopics().subscribe((data: any) => {
-      this.topics = data.topics;
-      this.difficulty = data.difficulty;
-      console.log('topics:', data.topics[0].name);
-      console.log('topics1:', this.topics);
-      console.log('difficulty:', this.difficulty);
-    });
+    // Get topics for user to select from
+    this.TopicsService.getAllTopics()
   }
 
   selectTopic(topic: any) {
@@ -55,7 +57,7 @@ export class TopicsComponent {
   }
 
   selectDifficulty(level: any) {
-    console.log('In the diffectly');
+    console.log('In the difficulty');
     this.selectedDifficulty = level;
     console.log('Selected Difficulty', this.selectedDifficulty);
   }

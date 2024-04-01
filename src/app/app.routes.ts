@@ -9,22 +9,18 @@ import { SignupComponent } from './components/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
 import { TopicsComponent } from './components/topics/topics.component';
 
-import { ApiService } from './api.service';
-
 const AppRoutes: Routes = [
-    { path: 'home', component: HomeComponent,
-       
-    },
-    { path: 'login', component: LoginComponent },
-    { path: 'signup', component: SignupComponent },
-    { path: 'topics', component: TopicsComponent },
-    { path: 'question', component: QuestionAnswerComponent },
-    { path: 'history', component: UserHistoryComponent },
-    { path: 'progress', component: UserProgressComponent },
-    { path: 'user', component: UserComponent },
-    { path: '**', redirectTo: '/home' }
+  { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'topics', component: TopicsComponent },
+  { path: 'question', component: QuestionAnswerComponent },
+  { path: 'history', component: UserHistoryComponent },
+  { path: 'progress', component: UserProgressComponent },
+  { path: 'user', component: UserComponent },
+  { path: '**', redirectTo: '/home' },
 ];
 
 // COMMENT: history and progress may need fixing => dashboard or /user should contain history and progress
 
-export default AppRoutes
+export default AppRoutes;

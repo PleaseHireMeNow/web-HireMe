@@ -1,83 +1,85 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../api.service';
+import { ApiService } from '../../services/api.service';
 import { Question } from '../../common/models/question';
 import { Answer, Session } from '../../common/models/session';
 import { Router } from '@angular/router';
-import { NewOrPrevSessionService } from '../../services/sessions/new-or-prev-session.service';
+import { UserService } from '../../services/user/user.service';
+import { SessionService } from '../../services/session/session.service';
 
 @Component({
   selector: 'app-question-answer',
   standalone: true,
-  imports: [CommonModule,],
+  imports: [CommonModule],
   templateUrl: './question-answer.component.html',
-  styleUrl: './question-answer.component.scss'
+  styleUrl: './question-answer.component.scss',
 })
 export class QuestionAnswerComponent {
   questions: Session = {} as Session;
   currentQuestionIndex: number = 0;
-  correctAnswer: boolean|null = null;
-  submit: boolean|null = null;
+  correctAnswer: boolean | null = null;
+  submit: boolean | null = null;
   currentState: any;
   clickedAnswer: any;
 
-  constructor(private apiService: ApiService, private router: Router, private NewOrPrevSessionService: NewOrPrevSessionService  ) {
-    this.currentState = this.NewOrPrevSessionService.getState();
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private userService: UserService,
+    private sessionService: SessionService
+  ) {
+    this.currentState = this.sessionService.sessionType();
   }
 
-  ngOnInit(): void {
-    this.apiService.getAllQuestions().subscribe((data: any) => {
-      this.questions = data;
-      this.currentQuestionIndex = this.questions.current_question
-      console.log('Data:', data);
-      console.log('this.currentState', this.currentState)
-      // console.log('Questions_id', this.questions[0].questions)
-      // console.log('Questions 1', this.questions[0].question_content.text)
-      // console.log('Question 2:', this.questions[1].question_content.text)
-      // console.log('answer 1:', this.questions[0].question_content.answers[0].answer_content.text)
-      // console.log('answer 2:', this.questions[0].question_content.answers[1].answer_content.text)
-    });
-  }
+  async ngOnInit() {
+    
+      // Has session, is in the middle of it
+      // Else needs a new session (no session | complete session)
+      const session_history = this.userService.user().session_history
 
-  handleAnswer(question: Question, answer: Answer){
-    console.log('This answer has been selected', answer)
-    if(answer.is_correct){
-      console.log('You are correct')
-      this.correctAnswer = true;
+      if (session_history[0].current_question + 1 < session_history[0].questions.length) {
+        // put the most recent session into the questions signal
+        this.sessionService.session.set(session_history[0]);
+      } else {
+        await this.sessionService.getNewSession()
+      }
     }
-    else{
-      console.log('WRONG')
+  
+
+  async handleAnswer(question: Question, answer: Answer) {
+    console.log('This answer has been selected', answer);
+    if (answer.is_correct) {
+      console.log('You are correct');
+      this.correctAnswer = true;
+    } else {
+      console.log('WRONG');
       this.correctAnswer = false;
     }
-    this.clickedAnswer = answer
-    this.apiService.sendAnswer(question,answer).subscribe( (res) => {
-      console.log('post response', res)
-    } ,(error) => {
-      console.log('error', error)
-    }) ;
+    this.clickedAnswer = answer;
+    let res = await this.apiService.sendAnswer(question, answer)
+        console.log('post response', res);
   }
 
-  nextQuestion(){
-    if(this.currentQuestionIndex < this.questions.questions.length + 1 ){
-      console.log('Index:', this.currentQuestionIndex)
-      console.log('question.length', this.questions.questions.length)
+  nextQuestion() {
+    if (this.currentQuestionIndex < this.questions.questions.length + 1) {
+      console.log('Index:', this.currentQuestionIndex);
+      console.log('question.length', this.questions.questions.length);
       this.currentQuestionIndex++;
       this.correctAnswer = null;
       this.submit = null;
     }
   }
 
-  handleSubmit(){
-    if(this.correctAnswer === null){
+  handleSubmit() {
+    if (this.correctAnswer === null) {
       alert('Please select an answer before submitting.');
       return;
     }
-    console.log('I clicked submit!', this.correctAnswer)
+    console.log('I clicked submit!', this.correctAnswer);
     this.submit = true;
   }
 
   navigateToUserPage() {
     this.router.navigate(['/user']);
   }
-
 }
